@@ -52,6 +52,9 @@
     "import/extensions": 0,
     "import/prefer-default-export": 0,
     "no-shadow": 0,
-    "@typescript-eslint/no-explicit-any": 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "linebreak-style": 0,
+    "max-len": 0,
+    "@typescript-eslint/no-var-requires": 1
   }
 }

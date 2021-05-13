@@ -1,14 +1,19 @@
-import React, { FC, ReactElement, memo } from 'react';
+import React, {
+  FC, memo, ReactElement, Suspense,
+} from 'react';
 import { renderRoutes } from 'react-router-config';
 import { BrowserRouter } from 'react-router-dom';
+
+import './assets/css/global.css';
 import routers from './router';
-import Login from './pages/login';
+import Loading from './components/loading';
 
 const App: FC = (): ReactElement => (
-  <Login />
-  // <BrowserRouter>
-  //   {renderRoutes(routers)}
-  // </BrowserRouter>
+  <BrowserRouter>
+    <Suspense fallback={<Loading />}>
+      {renderRoutes(routers)}
+    </Suspense>
+  </BrowserRouter>
 );
 
 export default memo(App);

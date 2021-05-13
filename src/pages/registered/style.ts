@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const LoginWrapper = styled.div`
+export const RegisteredWrapper = styled.div`
   width: 200px;
   height: 200px;
-  background: rebeccapurple;
+  background: aquamarine;
 `;

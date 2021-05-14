@@ -3,22 +3,25 @@ import React, {
   ReactElement,
   memo, useEffect,
 } from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
 // 类型
 import { RootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
 import { PageProps } from '@src/common/types/sotre-types/router-component-props-type';
 
 // 组件和样式
-import { Card } from 'antd';
-import MForm from '@pages/login/c-pages/form';
+import { Card, message } from 'antd';
+import MForm from '@pages/login/components/form';
 import FormErrorMsg from '@components/form-error-msg';
+
+import LocalStorage from '@utils/local-storage-utils';
+import { USER_KEY } from '@src/common/constant/auth-constant';
+import { changeLoginStateAction, changeUserInfoAction } from '@pages/login/store/actions-creators';
 import { LoginWrapper } from './style';
 
-type IProps = PageProps
-
-const Login: FC<IProps> = (props:IProps): ReactElement => {
+const Login: FC<PageProps> = (props:PageProps): ReactElement => {
   const { history } = props;
+  const dispatch = useDispatch();
 
   const { errMsg, whetherToLogIn } = useSelector((state:RootReducerStateType) => ({
     errMsg: state.auth.loginErrMsg,
@@ -26,11 +29,20 @@ const Login: FC<IProps> = (props:IProps): ReactElement => {
   }), shallowEqual);
 
   useEffect(() => {
+    const user = LocalStorage.readPermanentlyStoreData(USER_KEY);
+    if (user) {
+      dispatch(changeUserInfoAction(user));
+      dispatch(changeLoginStateAction(true));
+      props.history.replace('/admin');
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     if (whetherToLogIn) {
       history.replace('/admin');
+      message.success('登录成功');
     }
   }, [whetherToLogIn]);
-  console.log(document.cookie);
 
   return (
     <LoginWrapper>

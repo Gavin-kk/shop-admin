@@ -1,3 +1,11 @@
+// form表单提交数据的类型
+export type IFormType ={
+    username:string,
+    password:string,
+    remember:boolean
+};
+
+// api接口响应数据的类型
 export type Role = {
     menus: any;
 }

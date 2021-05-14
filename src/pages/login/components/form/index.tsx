@@ -9,7 +9,7 @@ import {
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { sendLoginRequestAction } from '@pages/login/store/actions-creators';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { IFormType } from '../../types/form-submit-type';
+import { IFormType } from '@pages/login/typing';
 
 type callbackType = (rule: any, value: string, cb: any) => void
 
@@ -23,10 +23,10 @@ const MForm: FC = (): ReactElement => {
     dispatch(sendLoginRequestAction(userInput));
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    // 验证失败
-    console.log('Failed:', errorInfo);
-  };
+  // const onFinishFailed = (errorInfo: any) => {
+  // 验证失败
+  // console.log('Failed:', errorInfo);
+  // };
 
   // 表单验证
   const verifyUsername:callbackType = useCallback((rule:any, value:string, cb:any) => {
@@ -59,7 +59,7 @@ const MForm: FC = (): ReactElement => {
       name="login"
       initialValues={{ remember: true, username: 'admin', password: 'admin' }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      // onFinishFailed={onFinishFailed} 验证失败回调
     >
       <Form.Item
         name="username"

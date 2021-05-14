@@ -1,6 +1,6 @@
 import { CombinedState, Reducer } from 'redux';
 
-import { IUserInfo } from '@pages/login/types/login-response-type';
+import { IUserInfo } from '@pages/login/typing';
 import { IActionType } from './action-type';
 
 export interface ILoginState {

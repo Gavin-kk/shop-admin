@@ -1,12 +1,18 @@
 import React, { FC, ReactElement, memo } from 'react';
 import { Spin } from 'antd';
 
-import { LoadingWarpper } from './style';
-
 const Loading: FC = (): ReactElement => (
-  <LoadingWarpper>
-    <Spin tip="Loading..." />
-  </LoadingWarpper>
+  <Spin
+    tip="请稍候..."
+    style={
+      {
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+      }
+    }
+  />
 );
 
 export default memo(Loading);

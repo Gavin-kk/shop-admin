@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactElement, memo, useEffect, useCallback,
+  FC, ReactElement, memo, useEffect, useCallback, Suspense,
 } from 'react';
 import { useDispatch } from 'react-redux';
 import { Layout } from 'antd';
@@ -13,7 +13,8 @@ import { changeLoginStateAction, changeUserInfoAction } from '@pages/login/store
 import AdminHeader from '@pages/admin/components/header';
 import AdminFooter from '@pages/admin/components/footer';
 import LeftNavbar from '@pages/admin/components/left-navbar';
-import { renderRoutes } from 'react-router-config';
+import { renderRoutes, RouteConfig } from 'react-router-config';
+import Loading from '@components/loading';
 import { AdminWrapper } from './style';
 
 const {
@@ -41,7 +42,7 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
     props.history.replace('/login');
   }, [dispatch]);
 
-  const routers = props.route?.routes;
+  const childRouters:RouteConfig[] | undefined = props.route?.routes;
 
   return (
     <AdminWrapper>
@@ -53,14 +54,17 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
           <Header style={{ height: 84 }}>
             <AdminHeader signOut={signOut} />
           </Header>
-          <Content>{renderRoutes(routers)}</Content>
+          <Content>
+            <Suspense fallback={<Loading />}>
+              {renderRoutes(childRouters)}
+            </Suspense>
+          </Content>
           <Footer>
             <AdminFooter />
           </Footer>
         </Layout>
       </Layout>
     </AdminWrapper>
-
   );
 };
 

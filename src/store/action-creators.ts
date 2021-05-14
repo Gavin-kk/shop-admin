@@ -1,6 +1,6 @@
-import { actionType } from '../common/types/sotre-types/action-type';
+import { IActionType } from '../common/types/sotre-types/action-type';
 import { ActionTypeConstant } from './constant';
 
-export const changeListAction = ():actionType => ({
+export const changeListAction = ():IActionType => ({
   type: ActionTypeConstant.changelist,
 });

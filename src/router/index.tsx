@@ -1,10 +1,10 @@
 import React, { ReactElement, lazy } from 'react';
+import { RouteConfig } from 'react-router-config';
 import { Redirect } from 'react-router-dom';
 
 const Login = lazy(() => import('../pages/login'));
-const Registered = lazy(() => import('../pages/registered'));
 
-const routers = [
+const routers:RouteConfig[] = [
   {
     path: '/',
     exact: true,
@@ -25,10 +25,6 @@ const routers = [
     //   },
     // ],
     // components:
-  },
-  {
-    path: '/registered',
-    component: Registered,
   },
 ];
 

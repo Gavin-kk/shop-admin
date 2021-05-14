@@ -8,6 +8,6 @@ const httpRequest = axios.create({
 
 httpRequest.interceptors.request.use((config:AxiosRequestConfig) => config, ((error) => Promise.reject(error)));
 
-httpRequest.interceptors.response.use((response:AxiosResponse) => response.data, (error) => Promise.reject(error));
+httpRequest.interceptors.response.use((response:AxiosResponse) => response, (error) => Promise.reject(error));
 
 export default httpRequest;

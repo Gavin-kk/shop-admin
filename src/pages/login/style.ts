@@ -39,6 +39,7 @@ export const LoginWrapper = styled.div.attrs({
       
       .from {
         width: 100%;
+        position: relative;
 
         .ant-row {
           justify-content: center;
@@ -46,6 +47,27 @@ export const LoginWrapper = styled.div.attrs({
         
         .submit-login {
           width: 100%;
+          margin-top: 20px;
+        }
+        
+        .error-msg-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          left: 50%;
+          bottom: 45px;
+          transform: translateX(-50%);
+          color: red;
+          height: 16px;
+          
+          .error-msg {
+            margin-left: 5px;
+          }
+          
+          .anticon {
+            transform: rotate(180deg);
+          }
         }
       }
     }

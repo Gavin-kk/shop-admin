@@ -1,4 +1,4 @@
-export type actionType = {
+export interface IActionType {
     type:string,
     data?:any
 }

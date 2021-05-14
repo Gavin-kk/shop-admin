@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactElement, memo, useState, useCallback, useEffect,
+  FC, ReactElement, memo, useState, useCallback,
 } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -7,9 +7,9 @@ import {
   Button, Checkbox, Form, Input,
 } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { IFormType } from '@pages/login/types/form-submit-type';
 import { sendLoginRequestAction } from '@pages/login/store/actions-creators';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { IFormType } from '../../types/form-submit-type';
 
 type callbackType = (rule: any, value: string, cb: any) => void
 

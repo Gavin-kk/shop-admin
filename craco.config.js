@@ -30,7 +30,7 @@ module.exports = {
   // webpack: {
   //   alias: {
   //     '@src': resolve('src'),
-  //     '@request': resolve('./request'),
+  //     '@services': resolve('./services'),
   //     '@pages': resolve('./pages'),
   //     '@assets': resolve('./assets'),
   //     '@components': resolve('./components'),

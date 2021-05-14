@@ -5,8 +5,9 @@ import { renderRoutes } from 'react-router-config';
 import { BrowserRouter } from 'react-router-dom';
 
 import './assets/css/global.css';
-import routers from './router';
 import Loading from './components/loading';
+
+import routers from './router';
 
 const App: FC = (): ReactElement => (
   <BrowserRouter>

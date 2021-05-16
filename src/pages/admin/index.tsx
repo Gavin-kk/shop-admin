@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactElement, memo, useEffect, useCallback, Suspense,
+  FC, ReactElement, memo, useEffect, Suspense,
 } from 'react';
 import { useDispatch } from 'react-redux';
 import { Layout } from 'antd';
@@ -34,14 +34,6 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
     }
   }, [dispatch]);
 
-  // 退出登录
-  const signOut = useCallback(() => {
-    LocalStorage.removePermanentlyStoreData(USER_KEY);
-    dispatch(changeLoginStateAction(false));
-    dispatch(changeUserInfoAction(null));
-    props.history.replace('/login');
-  }, [dispatch]);
-
   const childRouters:RouteConfig[] | undefined = props.route?.routes;
 
   return (
@@ -51,8 +43,8 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
           <LeftNavbar />
         </Sider>
         <Layout>
-          <Header style={{ height: 84 }}>
-            <AdminHeader signOut={signOut} />
+          <Header style={{ height: 100 }}>
+            <AdminHeader />
           </Header>
           <Content>
             <Suspense fallback={<Loading />}>

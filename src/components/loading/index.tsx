@@ -12,6 +12,7 @@ const Loading: FC = (): ReactElement => (
         transform: 'translate(-50%, -50%)',
       }
     }
+    delay={100}
   />
 );
 

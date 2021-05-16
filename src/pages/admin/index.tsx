@@ -43,10 +43,10 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
           <LeftNavbar />
         </Sider>
         <Layout>
-          <Header style={{ height: 100 }}>
+          <Header style={{ height: 100 }} className="head-parent">
             <AdminHeader />
           </Header>
-          <Content>
+          <Content className="content">
             <Suspense fallback={<Loading />}>
               {renderRoutes(childRouters)}
             </Suspense>

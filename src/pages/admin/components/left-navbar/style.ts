@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const LeftNavBarWrapper = styled.div`
   width: 256px;
-  height: 100px;
+  height: 96px;
   text-align: center;
 
   .text > span {

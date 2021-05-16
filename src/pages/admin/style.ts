@@ -12,5 +12,17 @@ export const AdminWrapper = styled.div`
       min-width: 256px !important;
       flex: 0 0 256px !important;
     }
+    
+    .head-parent {
+      padding: 0 25px;
+      background: #fff;
+    }
+    
+    .content {
+      margin: 25px;
+      margin-bottom: 0;
+      height: 100%;
+      background: white;
+    }
   }
 `;

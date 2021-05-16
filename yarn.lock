@@ -2045,6 +2045,13 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
+"@types/redux-thunk@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/@types/redux-thunk/download/@types/redux-thunk-2.1.0.tgz#bc2b6e972961831afb82a9bf4f06726e351f9416"
+  integrity sha1-vCtulylhgxr7gqm/TwZybjUflBY=
+  dependencies:
+    redux-thunk "*"
+
 "@types/resolve@0.0.8":
   version "0.0.8"
   resolved "https://registry.npm.taobao.org/@types/resolve/download/@types/resolve-0.0.8.tgz#f26074d238e02659e323ce1a13d041eee280e194"
@@ -4453,7 +4460,7 @@ date-fns@^2.15.0:
   resolved "https://registry.nlark.com/date-fns/download/date-fns-2.21.2.tgz#9db92305cf00626e9122e56c72195b17725594aa"
   integrity sha1-nbkjBc8AYm6RIuVschlbF3JVlKo=
 
-debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
+debug@2.6.9, debug@^2.1.3, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.npm.taobao.org/debug/download/debug-2.6.9.tgz?cache=0&sync_timestamp=1607566548985&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   integrity sha1-XRKFFd8TT/Mn6QpMk/Tgd6U2NB8=
@@ -5872,6 +5879,13 @@ globals@^13.6.0:
   integrity sha1-PiD1BIEM6HqNcuVa7PhDW1D0wbM=
   dependencies:
     type-fest "^0.20.2"
+
+globalthis@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/globalthis/download/globalthis-1.0.2.tgz#2a235d34f4d8036219f7e34929b5de9e18166b8b"
+  integrity sha1-KiNdNPTYA2IZ9+NJKbXenhgWa4s=
+  dependencies:
+    define-properties "^1.1.3"
 
 globby@11.0.1:
   version "11.0.1"
@@ -7396,6 +7410,13 @@ jsonfile@^6.0.1:
     universalify "^2.0.0"
   optionalDependencies:
     graceful-fs "^4.1.6"
+
+jsonp@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.npm.taobao.org/jsonp/download/jsonp-0.2.1.tgz#a65b4fa0f10bda719a05441ea7b94c55f3e15bae"
+  integrity sha1-pltPoPEL2nGaBUQep7lMVfPhW64=
+  dependencies:
+    debug "^2.1.3"
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -10255,6 +10276,14 @@ react-scripts@4.0.3:
   optionalDependencies:
     fsevents "^2.1.3"
 
+react-skycons@^0.8.8:
+  version "0.8.8"
+  resolved "https://registry.nlark.com/react-skycons/download/react-skycons-0.8.8.tgz#bf27d88395389f71e8b1c51899e695b8b720e25e"
+  integrity sha1-vyfYg5U4n3HoscUYmeaVuLcg4l4=
+  dependencies:
+    globalthis "^1.0.1"
+    skycons "^1.0.0"
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.nlark.com/react/download/react-17.0.2.tgz?cache=0&sync_timestamp=1620231294898&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact%2Fdownload%2Freact-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
@@ -10363,6 +10392,11 @@ redux-saga@^1.1.3:
   integrity sha1-nz5q69PJlLvA9pAaYl+aQrUdERI=
   dependencies:
     "@redux-saga/core" "^1.1.3"
+
+redux-thunk@*, redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/redux-thunk/download/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+  integrity sha1-UcLBmhhe1Rh6qpotCLZm0NZGdiI=
 
 redux@^4.0.0, redux@^4.0.4, redux@^4.1.0:
   version "4.1.0"
@@ -11045,6 +11079,11 @@ sisteransi@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npm.taobao.org/sisteransi/download/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha1-E01oEpd1ZDfMBcoBNw06elcQde0=
+
+skycons@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.nlark.com/skycons/download/skycons-1.0.0.tgz#afb160c5901470aae84676fbc38bbd7dd5b69d8f"
+  integrity sha1-r7FgxZAUcKroRnb7w4u9fdW2nY8=
 
 slash@^3.0.0:
   version "3.0.0"

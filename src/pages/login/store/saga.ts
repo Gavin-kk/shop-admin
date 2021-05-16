@@ -23,10 +23,10 @@ function* sendLoginRequest(action: IActionType) {
 
     if (!result.data.status) {
       // 正确的取到的数据
-      yield put(changeUserInfoAction(result.data.data));
+      yield put(changeUserInfoAction(result.data));
       yield put(changeLoginErrorMessageAction(null));
       yield put(changeLoginStateAction(true));
-      LocalStorage.permanentlyStoreData(USER_KEY, result.data.data);
+      LocalStorage.permanentlyStoreData(USER_KEY, result.data);
     } else {
       // 错误
       yield put(changeLoginErrorMessageAction((result.data.msg as string)));

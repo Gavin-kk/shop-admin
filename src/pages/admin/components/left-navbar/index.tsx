@@ -15,7 +15,7 @@ const LeftNavbar: FC = (): ReactElement => {
       return (
         <SubMenu key={item.title} icon={item.icon} title={item.title}>
           {/* 如果存在 children 那么就重新调用一下处理menu 把children传入 */}
-          {processingMenu(item.children)}
+          { processingMenu(item.children) }
         </SubMenu>
       );
     }

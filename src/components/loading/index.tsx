@@ -1,7 +1,11 @@
 import React, { FC, ReactElement, memo } from 'react';
 import { Spin } from 'antd';
 
-const Loading: FC = (): ReactElement => (
+interface IProps {
+    size?:'small' | 'default' | 'large' | undefined
+}
+
+const Loading: FC<IProps> = (props:IProps): ReactElement => (
   <Spin
     tip="请稍候..."
     style={
@@ -12,8 +16,13 @@ const Loading: FC = (): ReactElement => (
         transform: 'translate(-50%, -50%)',
       }
     }
+    size={props.size}
     delay={100}
   />
 );
+
+Loading.defaultProps = {
+  size: undefined,
+};
 
 export default memo(Loading);

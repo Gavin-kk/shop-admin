@@ -28,11 +28,19 @@ export const WeatherWrapper = styled.div`
     text-align: center;
     line-height: 50px;
   }
-  .nightTemperature {
-    margin-left: -5px;
+  
+  .weather {
+    margin-right: 8px;
   }
+  
   .dayTemperature, .nightTemperature {
-    width: 32px;
+    //width: 32px;
+    margin: 0;
+    padding: 0;
     height: 100%  ;
+  }
+  
+  .gap {
+    width: 10px;
   }
 `;

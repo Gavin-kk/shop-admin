@@ -6,3 +6,5 @@ export const CHANGE_LOGIN_ERROR_MESSAGE = 'change_login_error_message';
 export const CHANGE_USER_INFO = 'change_user_info';
 // 改变登录状态
 export const CHANGE_LOGIN_STATE = 'change_login_state';
+// 获取用户信息
+export const GET_USER_INFO = 'get_user_info';

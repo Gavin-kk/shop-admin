@@ -12,6 +12,8 @@ export const HeaderWrapper = styled.div`
     height: 50px;
     color: #000;
     border-bottom: 2px solid rgb(80,168,192);
+    
+   
 
     .date {
       height: 50px;

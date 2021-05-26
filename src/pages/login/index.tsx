@@ -3,7 +3,7 @@ import React, {
   ReactElement,
   memo, useEffect,
 } from 'react';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 // 类型
 import { RootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
@@ -14,28 +14,15 @@ import { Card, message } from 'antd';
 import MForm from '@pages/login/components/form';
 import FormErrorMsg from '@components/form-error-msg';
 
-import LocalStorage from '@utils/local-storage-utils';
-import { USER_KEY } from '@src/common/constant/auth-constant';
-import { changeLoginStateAction, changeUserInfoAction } from '@pages/login/store/actions-creators';
 import { LoginWrapper } from './style';
 
 const Login: FC<PageProps> = (props:PageProps): ReactElement => {
   const { history } = props;
-  const dispatch = useDispatch();
 
   const { errMsg, whetherToLogIn } = useSelector((state:RootReducerStateType) => ({
     errMsg: state.auth.loginErrMsg,
     whetherToLogIn: state.auth.whetherToLogIn,
   }), shallowEqual);
-
-  useEffect(() => {
-    const user = LocalStorage.readPermanentlyStoreData(USER_KEY);
-    if (user) {
-      dispatch(changeUserInfoAction(user));
-      dispatch(changeLoginStateAction(true));
-      props.history.replace('/admin');
-    }
-  }, [dispatch]);
 
   useEffect(() => {
     if (whetherToLogIn) {

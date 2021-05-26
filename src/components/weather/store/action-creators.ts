@@ -1,34 +1,40 @@
 import { Dispatch } from 'redux';
 import { message } from 'antd';
 
+import { IActionType } from '@src/common/types/sotre-types/action-type';
 import * as actionTypes from './constant';
+import { IWeatherInfo } from '../typing';
 
-export const changeWeatherInfoAction = (info:any) => ({
+export const changeWeatherInfoAction = (info:IWeatherInfo):IActionType => ({
   type: actionTypes.CHANGE_WEATHER_INFO,
   data: info,
 });
 
 export const getWeatherInfoAction = ():any => (dispatch:Dispatch<any>) => {
-  const geoc = new window.BMap.Geocoder();
-  const geolocation = new window.BMap.Geolocation();
-  geolocation.getCurrentPosition((r:any) => {
-    geoc.getLocation(r.point, (rs:any) => {
-      window.AMap.plugin('AMap.Weather', () => {
-        // 创建天气查询实例
-        const weather = new window.AMap.Weather();
-        // 得到天气的城市信息
-        const { city } = rs.addressComponents;
-        // 执行实时天气信息查询
-        weather.getForecast(city, (err:any, data:any) => {
-          if (err) {
-            message.error(err);
-          } else {
-            dispatch(changeWeatherInfoAction(data));
-          }
+  try {
+    const geoc = new window.BMap.Geocoder();
+    const geolocation = new window.BMap.Geolocation();
+    geolocation.getCurrentPosition((r:any) => {
+      geoc.getLocation(r.point, (rs:any) => {
+        window.AMap.plugin('AMap.Weather', () => {
+          // 创建天气查询实例
+          const weather = new window.AMap.Weather();
+          // 得到天气的城市信息
+          const { city } = rs.addressComponents;
+          // 执行实时天气信息查询
+          weather.getForecast(city, (err:any, data:any) => {
+            if (err) {
+              message.error(err);
+            } else {
+              dispatch(changeWeatherInfoAction(data));
+            }
+          });
         });
       });
     });
-  });
+  } catch (error) {
+    message.error(`天气数据请求出错${error.message}`);
+  }
 
   /* const geoc = new window.BMap.Geocoder();
     // weatherRequest('呼和浩特市');

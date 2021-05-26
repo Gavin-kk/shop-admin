@@ -23,3 +23,8 @@ export const changeLoginStateAction = (whetherToLogIn:boolean):IActionType => ({
   type: actionTypesConstant.CHANGE_LOGIN_STATE,
   data: whetherToLogIn,
 });
+
+// 请求用户信息
+export const getUserInfoAction:IActionType = {
+  type: actionTypesConstant.GET_USER_INFO,
+};

@@ -6,21 +6,31 @@ export type IFormType ={
 };
 
 // api接口响应数据的类型
-export type Role = {
-    menus: any;
-}
-
-export type Data = {
-    _id: string;
+/* User */
+export interface User {
+    id: number;
     username: string;
-    password: string;
-    'create_time': number;
-    __v: number;
-    role: Role;
+    phone: string | null;
+    email: string | null;
+    createAt: string;
+    updateAt: string;
 }
 
-export interface IUserInfo {
-    status: number;
-    data?: Data;
-    msg?:string
+/* Data */
+export interface Data {
+    user: User;
+    token: string;
+}
+
+export interface IResponse {
+    code: number;
+    message: string;
+}
+/* LoginResponse */
+export interface ILoginResponse extends IResponse{
+    data: Data;
+}
+
+export interface UserResponse extends IResponse{
+    data:User;
 }

@@ -1,12 +1,12 @@
 import { CombinedState, Reducer } from 'redux';
 
-import { IUserInfo } from '@pages/login/typing';
+import { User } from '@pages/login/typing';
 import { IDefaultData } from '@src/components/weather/store/reducer';
 import { IActionType } from './action-type';
 
 export interface ILoginState {
     loginErrMsg: string | null
-    userInfo: IUserInfo | null
+    userInfo: User | null
     whetherToLogIn:boolean
 }
 

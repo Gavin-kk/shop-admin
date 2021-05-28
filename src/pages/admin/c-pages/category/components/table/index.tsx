@@ -13,7 +13,7 @@ import { deleteClassifyAction, getClassifyChildListAction } from '../../store/ac
 
 interface IProps{
   editClassifyClick:(categoryName:string, id:number)=>void
-  breadcrumbChange:(id:number)=>void
+  breadcrumbChange:(id:number, categoryName:string)=>void
 }
 
 const GNTable: FC<IProps> = (props:IProps): ReactElement => {
@@ -42,7 +42,7 @@ const GNTable: FC<IProps> = (props:IProps): ReactElement => {
         const getSubcategory = () => {
           // 获取子分类的数据
           dispatch(getClassifyChildListAction(Category.id));
-          breadcrumbChange(Category.id);
+          breadcrumbChange(Category.id, Category.categoryName);
         };
         return (
           <AddButtonNodeWrapper key={Category.id + Category.categoryName}>

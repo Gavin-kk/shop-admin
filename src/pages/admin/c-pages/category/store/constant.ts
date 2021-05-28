@@ -4,5 +4,6 @@ export enum actionType {
     ADD_CLASSIFY='add_classify',
     UPDATE_CHANGE_CLASSIFY='update_change_classify',
     DELETE_CLASSIFY='delete_classify',
-    GET_CLASSIFY_CHILD_LIST='get_classify_child_list'
+    GET_CLASSIFY_CHILD_LIST='get_classify_child_list',
+    CHANGE_CURRENT_CLASSIFY_ID='change_current_classifyId'
 }

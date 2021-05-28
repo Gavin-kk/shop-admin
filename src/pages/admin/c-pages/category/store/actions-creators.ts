@@ -44,3 +44,9 @@ export const getClassifyChildListAction = (id:number):IActionType => ({
     id,
   },
 });
+
+// 更改当前分类的id
+export const changeCurrentClassifyIdAction = (id:number):IActionType => ({
+  type: actionType.CHANGE_CURRENT_CLASSIFY_ID,
+  data: id,
+});

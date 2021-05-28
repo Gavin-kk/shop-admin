@@ -33,8 +33,8 @@ function* addClassify(action:IActionType) {
 
   try {
     yield addClassifyRequest(action.data.categoryName, action.data.parentId);
-    if (state.classify.classifyList[0].parentId) {
-      yield put(getClassifyChildListAction(state.classify.classifyList[0].parentId));
+    if (state.classify.currentId) {
+      yield put(getClassifyChildListAction(state.classify.currentId));
     } else {
       yield put(getAListOfFirstLevelCategoriesAction);
     }
@@ -49,8 +49,8 @@ function* updateChangeClassify(action:IActionType) {
   const state:IRootReducerStateType = yield select(getState);
   try {
     yield updateClassifyRequest(categoryName, parentId);
-    if (state.classify.classifyList[0].parentId) {
-      yield put(getClassifyChildListAction(state.classify.classifyList[0].parentId));
+    if (state.classify.currentId) {
+      yield put(getClassifyChildListAction(state.classify.currentId));
     } else {
       yield put(getAListOfFirstLevelCategoriesAction);
     }
@@ -65,8 +65,8 @@ function* deleteClassify(action:IActionType) {
   const state:IRootReducerStateType = yield select(getState);
   try {
     yield deleteClassifyRequest(id);
-    if (state.classify.classifyList[0].parentId) {
-      yield put(getClassifyChildListAction(state.classify.classifyList[0].parentId));
+    if (state.classify.currentId) {
+      yield put(getClassifyChildListAction(state.classify.currentId));
     } else {
       yield put(getAListOfFirstLevelCategoriesAction);
     }

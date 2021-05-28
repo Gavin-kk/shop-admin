@@ -32,8 +32,9 @@ const SetClassify: FC<IProps> = (props:IProps): ReactElement => {
     show, handleCancel, handleOk, useMethod, title, row,
   } = props;
 
-  const { classifyList } = useSelector((state:IRootReducerStateType) => ({
+  const { classifyList, currentId } = useSelector((state:IRootReducerStateType) => ({
     classifyList: state.classify.classifyList,
+    currentId: state.classify.currentId,
   }), shallowEqual);
 
   const dispatch = useDispatch();
@@ -57,15 +58,15 @@ const SetClassify: FC<IProps> = (props:IProps): ReactElement => {
     switch (true) {
       case useMethod === UseMethod.Add:
         // 增加
-        if (classifyList[0].parentId === null && !values.parentId) {
+        if (currentId === null && !values.parentId) {
           // 添加一级分类
           dispatch(addClassifyAction(null, values.categoryName));
         } else if (values.parentId) {
           // 添加多级分类
           dispatch(addClassifyAction(values.parentId, values.categoryName));
-        } else if (classifyList[0].parentId) {
+        } else if (currentId) {
           // 默认添加某一级分类
-          dispatch(addClassifyAction(classifyList[0].parentId, values.categoryName));
+          dispatch(addClassifyAction(currentId, values.categoryName));
         }
         break;
       default: // 默认为修改

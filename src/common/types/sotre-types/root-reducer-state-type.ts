@@ -15,6 +15,7 @@ export interface ILoginState {
 // 商品分类页面的 reducer
 export interface ICategoryState {
     classifyList:ICategory[]
+    currentId:number | null
 }
 export interface IRootReducerStateType {
     auth: ILoginState

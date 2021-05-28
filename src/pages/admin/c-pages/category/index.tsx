@@ -5,6 +5,7 @@ import { Button, Card } from 'antd';
 
 import { useDispatch } from 'react-redux';
 import {
+  changeCurrentClassifyIdAction,
   getAListOfFirstLevelCategoriesAction,
   getClassifyChildListAction,
 } from '@pages/admin/c-pages/category/store/actions-creators';
@@ -23,13 +24,14 @@ const Category: FC = (): ReactElement => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   // 是否显示修改分类弹框
   const [alterOrAdd, setAlterOrAdd] = useState<UseMethod>(UseMethod.Add);
+
   // 面包屑添加的数据
   const [breadcrumbsConfig, setBreadcrumbsConfig] = useState<TitlesType[]>([{
-    title: '1级分类',
+    title: '一级分类',
     click(e:MouseEvent<HTMLElement>) {
       e.preventDefault();
       setBreadcrumbsConfig([{
-        title: '1级分类',
+        title: '一级分类',
         click(e:MouseEvent<HTMLElement>) {
           e.preventDefault();
           setBreadcrumbsConfig(breadcrumbsConfig);
@@ -41,10 +43,13 @@ const Category: FC = (): ReactElement => {
   }]);
 
   // 在列表组件中每次点击查看分类执行的函数
-  const setBreadcrumbsConfigCallback = useCallback((id:number) => {
+  const setBreadcrumbsConfigCallback = useCallback((id:number, categoryName:string) => {
+    // 记录一个当前分类的id
+    dispatch(changeCurrentClassifyIdAction(id));
     const n = [...breadcrumbsConfig];
     n.push({
-      title: `${n.length + 1}级分类`,
+      // title: `${n.length + 1}级分类`,
+      title: categoryName,
       // 给每个面包屑 绑定的点击事件
       click(e:MouseEvent<HTMLElement>) {
         e.preventDefault();

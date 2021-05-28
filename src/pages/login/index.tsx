@@ -6,30 +6,30 @@ import React, {
 import { useSelector, shallowEqual } from 'react-redux';
 
 // 类型
-import { RootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
 import { PageProps } from '@src/common/types/sotre-types/router-component-props-type';
 
 // 组件和样式
-import { Card, message } from 'antd';
+import { Card } from 'antd';
 import MForm from '@pages/login/components/form';
 import FormErrorMsg from '@components/form-error-msg';
 
+import { USER_KEY } from '@src/common/constant/auth-constant';
 import { LoginWrapper } from './style';
 
 const Login: FC<PageProps> = (props:PageProps): ReactElement => {
   const { history } = props;
 
-  const { errMsg, whetherToLogIn } = useSelector((state:RootReducerStateType) => ({
+  const { errMsg } = useSelector((state:IRootReducerStateType) => ({
     errMsg: state.auth.loginErrMsg,
-    whetherToLogIn: state.auth.whetherToLogIn,
   }), shallowEqual);
 
   useEffect(() => {
-    if (whetherToLogIn) {
+    const token:string | null = localStorage.getItem(USER_KEY);
+    if (token) {
       history.replace('/admin');
-      message.success('登录成功');
     }
-  }, [whetherToLogIn]);
+  }, []);
 
   return (
     <LoginWrapper>
@@ -41,10 +41,7 @@ const Login: FC<PageProps> = (props:PageProps): ReactElement => {
           <div className="from">
             {/* 表单验证 */}
             <MForm />
-            {errMsg
-            && (
-            <FormErrorMsg errMsg={errMsg} />
-            )}
+            { errMsg && (<FormErrorMsg errMsg={errMsg} />) }
           </div>
         </Card>
       </div>

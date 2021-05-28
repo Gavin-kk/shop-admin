@@ -17,7 +17,7 @@ const Loading: FC<IProps> = (props:IProps): ReactElement => (
       }
     }
     size={props.size}
-    delay={100}
+    delay={200}
   />
 );
 

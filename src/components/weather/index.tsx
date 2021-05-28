@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
 import Skycons, { SkyconsType } from 'react-skycons';
 
-import { RootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
 
 import { weatherIconArr } from '@src/config/weather-icon';
 import { getWeatherInfoAction } from '@components/weather/store/action-creators';
@@ -16,7 +16,7 @@ const Weather: FC = (): ReactElement => {
   const [whetherLoading, setWhetherLoading] = useState<boolean>(true);
   const [weatherIcon, setWeatherIcon] = useState<SkyconsType>(SkyconsType.CLEAR_DAY);
 
-  const { weatherInfo } = useSelector((state:RootReducerStateType) => ({
+  const { weatherInfo } = useSelector((state:IRootReducerStateType) => ({
     weatherInfo: state.weather.weatherInfo,
   }));
 
@@ -28,7 +28,7 @@ const Weather: FC = (): ReactElement => {
       if (window.BMap) {
         clearInterval(time);
         // 使用地理位置并获取天气信息
-        dispatch(getWeatherInfoAction());
+        // dispatch(getWeatherInfoAction());
       }
     }, 100);
     return () => {

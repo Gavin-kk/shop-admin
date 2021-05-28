@@ -52,11 +52,12 @@ const LeftNavbar: FC = (): ReactElement => {
   };
 
   return (
-    <LeftNavBarWrapper>
-      <NavLink to="/admin" className="text">
-        <span>后台管理系统</span>
-      </NavLink>
-
+    <>
+      <LeftNavBarWrapper>
+        <NavLink to="/admin" className="text">
+          <span>后台管理系统</span>
+        </NavLink>
+      </LeftNavBarWrapper>
       {/*  菜单 */}
       <Menu
         defaultSelectedKeys={[processTheSelectedMenuItem()]}
@@ -64,9 +65,10 @@ const LeftNavbar: FC = (): ReactElement => {
         mode="inline"
         theme="dark"
       >
-        {processingMenu(adminPageMenuConfig)}
+        { processingMenu(adminPageMenuConfig) }
       </Menu>
-    </LeftNavBarWrapper>
+    </>
+
   );
 };
 

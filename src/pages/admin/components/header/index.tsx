@@ -8,7 +8,7 @@ import { Popconfirm } from 'antd';
 import LocalStorage from '@utils/local-storage-utils';
 import { USER_KEY } from '@src/common/constant/auth-constant';
 import { changeLoginStateAction, changeUserInfoAction } from '@pages/login/store/actions-creators';
-import { RootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
 
 import MyDate from '@components/date';
 import Weather from '@components/weather';
@@ -18,7 +18,7 @@ import { HeaderWrapper } from './style';
 const AdminHeader: FC = (): ReactElement => {
   const [title, setTitle] = useState<string>('首页');
 
-  const { userInfo } = useSelector((state:RootReducerStateType) => ({
+  const { userInfo } = useSelector((state:IRootReducerStateType) => ({
     userInfo: state.auth.userInfo,
   }), shallowEqual);
 

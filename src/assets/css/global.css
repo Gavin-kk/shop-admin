@@ -1,4 +1,5 @@
 @import "./reset.css";
+@import '~antd/dist/antd.css';
 
 #root {
     height: 100%;
@@ -6,4 +7,10 @@
 
 .ant-popover-buttons {
     text-align: center !important;
+}
+
+body {
+    min-width: 700px;
+    background: rgb(240,242,245);
+    /*min-height: 700px;*/
 }

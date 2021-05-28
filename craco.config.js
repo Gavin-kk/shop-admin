@@ -27,14 +27,4 @@ module.exports = {
       ['import', { libraryName: 'antd', style: true }, 'pc'],
     ],
   },
-  // webpack: {
-  //   alias: {
-  //     '@src': resolve('src'),
-  //     '@services': resolve('./services'),
-  //     '@pages': resolve('./pages'),
-  //     '@assets': resolve('./assets'),
-  //     '@components': resolve('./components'),
-  //     '@utils': resolve('./utils'),
-  //   },
-  // },
 };

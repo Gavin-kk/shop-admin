@@ -14,5 +14,5 @@ export const LeftNavBarWrapper = styled.div`
     font-size: 24px;
     background: #202b31;
   }
-
+  
 `;

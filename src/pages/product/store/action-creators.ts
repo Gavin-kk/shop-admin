@@ -1,6 +1,6 @@
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { ActionType } from '@pages/product/store/constant';
-import { IProduct } from '@pages/product/typing';
+import { IDetails, IProduct, ISearch } from '@pages/product/typing';
 
 //
 export const getProductListAction:IActionType = {
@@ -31,7 +31,18 @@ export const getSearchListAction = (pageNum:number, pageSize:number, content:str
   },
 });
 // 更改reducer 中的searchList
-export const changeSearchListAction = (list:any):IActionType => ({
+export const changeSearchListAction = (list:ISearch[]):IActionType => ({
   type: ActionType.CHANGE_SEARCH_LIST,
   data: list,
+});
+
+// 获取商品详情
+export const getGoodsDetailAction = (id:number):IActionType => ({
+  type: ActionType.GET_GOODS_DETAIL,
+  data: { id },
+});
+// 更改reducer中的数据
+export const changeGoodsDetailAction = (data:IDetails):IActionType => ({
+  type: ActionType.CHANGE_GOODS_DETAIL,
+  data,
 });

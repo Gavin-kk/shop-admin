@@ -6,7 +6,7 @@ export function getProductRequest(): Promise<AxiosResponse<any>> {
 }
 
 // 上架商品 下架商品
-export function changeProductStatus(productId:number, status:string):Promise<AxiosResponse<any>> {
+export function changeProductStatusRequest(productId:number, status:string):Promise<AxiosResponse<any>> {
   return request.put('/commodity/update/status', {
     productId,
     status,
@@ -15,12 +15,21 @@ export function changeProductStatus(productId:number, status:string):Promise<Axi
 
 // 搜索商品接口
 
-export function searchProducts(pageNum:number, pageSize:number, content:string):Promise<AxiosResponse<any>> {
+export function searchProductsRequest(pageNum:number, pageSize:number, content:string):Promise<AxiosResponse<any>> {
   return request.get('/commodity/search', {
     params: {
       pageNum,
       pageSize,
       content,
+    },
+  });
+}
+
+// 获取商品详情
+export function getGoodsDetailRequest(id:number):Promise<AxiosResponse<any>> {
+  return request.get('/commodity/detail', {
+    params: {
+      id,
     },
   });
 }

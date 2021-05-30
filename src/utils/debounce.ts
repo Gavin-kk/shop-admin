@@ -1,5 +1,6 @@
+let timer:number | null = null;
+
 export function debounce(time:number, fn:() => void):() => void {
-  let timer:number | null = null;
   return () => {
     if (timer) {
       clearTimeout(timer);

@@ -7,6 +7,7 @@ import { ActionType } from '@pages/product/store/constant';
 const defaultState:IProductState = {
   productList: [],
   searchList: [],
+  detail: null,
 };
 function reducer(state = defaultState, action:IActionType):IProductState {
   return produce(state, (draft:WritableDraft<IProductState>) => {
@@ -16,6 +17,9 @@ function reducer(state = defaultState, action:IActionType):IProductState {
         return draft;
       case ActionType.CHANGE_SEARCH_LIST:
         draft.searchList = action.data;
+        return draft;
+      case ActionType.CHANGE_GOODS_DETAIL:
+        draft.detail = action.data;
         return draft;
       default:
         return draft;

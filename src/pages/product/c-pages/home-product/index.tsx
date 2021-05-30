@@ -5,7 +5,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { ProductWrapper } from '@pages/product/c-pages/home-product/style';
 import {
-  Button, Card,
+  Button, Card, message,
 } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
@@ -18,6 +18,7 @@ import {
   getSearchListAction,
 } from '../../store/action-creators';
 
+const timer:number | null = null;
 const HomeProduct: FC = (): ReactElement => {
   const { searchList } = useSelector((state: IRootReducerStateType) => ({
     searchList: state.product.searchList,

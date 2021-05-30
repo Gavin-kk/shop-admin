@@ -3,13 +3,20 @@ import {
 } from 'redux-saga/effects';
 import { ActionType } from '@pages/product/store/constant';
 import { AxiosResponse } from 'axios';
-import { getProductRequest, changeProductStatus, searchProducts } from '@src/services/product-request';
+import {
+  getProductRequest, changeProductStatusRequest, searchProductsRequest, getGoodsDetailRequest,
+} from '@src/services/product-request';
 import { IResponse } from '@src/common/types/sotre-types/response';
 import { message } from 'antd';
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { AVAILABLE, TAKE_THE_PRODUCT_OFF_THE_SHELF } from '@src/common/constant/product-constant';
-import { IProduct } from '../typing';
-import { changeProductListAction, changeSearchListAction, getProductListAction } from './action-creators';
+import { IDetails, IProduct, ISearch } from '../typing';
+import {
+  changeGoodsDetailAction,
+  changeProductListAction,
+  changeSearchListAction,
+  getProductListAction,
+} from './action-creators';
 
 //
 function* getProductList() {
@@ -25,7 +32,7 @@ function* getProductList() {
 function* sendNowOnShelf(action:IActionType) {
   const { id } = action.data;
   try {
-    yield changeProductStatus(id, AVAILABLE);
+    yield changeProductStatusRequest(id, AVAILABLE);
     yield put(getProductListAction);
     message.success('上架成功');
   } catch (error) {
@@ -37,7 +44,7 @@ function* sendNowOnShelf(action:IActionType) {
 function* offShelf(action:IActionType) {
   const { id } = action.data;
   try {
-    yield changeProductStatus(id, TAKE_THE_PRODUCT_OFF_THE_SHELF);
+    yield changeProductStatusRequest(id, TAKE_THE_PRODUCT_OFF_THE_SHELF);
     yield put(getProductListAction);
     message.success('下架成功');
   } catch (error) {
@@ -49,11 +56,20 @@ function* offShelf(action:IActionType) {
 function* getSearch(action:IActionType) {
   const { pageNum, pageSize, content } = action.data;
   try {
-    const reslut:AxiosResponse<IResponse<any>> = yield searchProducts(pageNum, pageSize, content);
+    const reslut:AxiosResponse<IResponse<ISearch[]>> = yield searchProductsRequest(pageNum, pageSize, content);
     yield put(changeSearchListAction(reslut.data.data));
-    // console.log(JSON.stringify(reslut.data.data));
   } catch (error) {
-    console.log(error.response.data.message || error.response.data.msg);
+    yield message.error(error.response.data.message || error.response.data.msg);
+  }
+}
+
+function* getGoodsDetail(action:IActionType) {
+  const { id } = action.data;
+  try {
+    const result:AxiosResponse<IResponse<IDetails[]>> = yield getGoodsDetailRequest(id);
+    yield put(changeGoodsDetailAction(result.data.data[0]));
+  } catch (error) {
+    yield message.error(error.response.data.message || error.response.data.msg);
   }
 }
 function* saga(): Generator<ForkEffect<never>> {
@@ -61,6 +77,7 @@ function* saga(): Generator<ForkEffect<never>> {
   yield takeEvery(ActionType.SEND_NOW_ON_SHELF, sendNowOnShelf);
   yield takeEvery(ActionType.SEND_OFF_SHELF, offShelf);
   yield takeEvery(ActionType.GET_SEARCH_LIST, getSearch);
+  yield takeEvery(ActionType.GET_GOODS_DETAIL, getGoodsDetail);
 }
 
 export default saga;

@@ -63,6 +63,19 @@
     "jsx-a11y/anchor-is-valid": 0,
     "react/jsx-props-no-spreading": 0,
     "camelcase": 0,
-    "react/no-this-in-sfc": 0
+    "react/no-this-in-sfc": 0,
+    "padded-blocks": 1,
+    "no-trailing-spaces": 1,
+    "no-multiple-empty-lines": 1,
+    "semi": 1,
+    "react/jsx-indent": 1,
+    "indent": 1,
+    "space-before-blocks": 1,
+    "keyword-spacing": 1,
+    "no-prototype-builtins": 0,
+    "react/jsx-closing-tag-location": 0,
+    "react/jsx-indent-props": 1,
+    "jsx-quotes": 1,
+    "react/jsx-tag-spacing": 1
   }
 }

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Popconfirm } from 'antd';
+import { message, Popconfirm } from 'antd';
 
 import LocalStorage from '@utils/local-storage-utils';
 import { USER_KEY } from '@src/common/constant/auth-constant';
@@ -26,6 +26,13 @@ const AdminHeader: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  useEffect(() => {
+    if (history.location.pathname === '/admin/product/detail') {
+      history.replace('/admin/product');
+      message.error('非法访问');
+    }
+  }, [history]);
+
   // 退出登录
   const signOut = useCallback(() => {
     LocalStorage.removePermanentlyStoreData(USER_KEY);
@@ -44,7 +51,7 @@ const AdminHeader: FC = (): ReactElement => {
       if (item.children) {
         titleProcessing(item.children);
       }
-      if (item.routerPath === history.location.pathname) {
+      if (history.location.pathname.indexOf((item.routerPath?.replace('/:id', '')) as string) !== -1) {
         setTitle(item.title);
       }
     });

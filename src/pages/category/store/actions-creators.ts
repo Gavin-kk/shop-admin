@@ -1,5 +1,5 @@
 import { IActionType } from '@src/common/types/sotre-types/action-type';
-import { actionType } from '@pages/admin/c-pages/category/store/constant';
+import { actionType } from '@pages/category/store/constant';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
 import { ICategory } from '../typing';
 
@@ -46,7 +46,7 @@ export const getClassifyChildListAction = (id:number):IActionType => ({
 });
 
 // 更改当前分类的id
-export const changeCurrentClassifyIdAction = (id:number):IActionType => ({
+export const changeCurrentClassifyIdAction = (id:number | null):IActionType => ({
   type: actionType.CHANGE_CURRENT_CLASSIFY_ID,
   data: id,
 });

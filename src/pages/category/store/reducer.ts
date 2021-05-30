@@ -2,7 +2,7 @@ import { produce } from 'immer';
 import { WritableDraft } from 'immer/dist/internal';
 
 import { IActionType } from '@src/common/types/sotre-types/action-type';
-import { actionType } from '@pages/admin/c-pages/category/store/constant';
+import { actionType } from '@pages/category/store/constant';
 import { ICategoryState } from '@src/common/types/sotre-types/root-reducer-state-type';
 
 const defaultData: ICategoryState = {

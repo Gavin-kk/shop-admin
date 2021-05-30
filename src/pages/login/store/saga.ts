@@ -24,7 +24,7 @@ function* sendLoginRequest(action: IActionType) {
     yield put(changeLoginErrorMessageAction(null));
     yield put(changeLoginStateAction(true));
     LocalStorage.permanentlyStoreData(USER_KEY, result.data.data.token);
-    message.success('登录成功');
+    yield message.success('登录成功');
     // 错误
   } catch (error:any) {
     yield put(changeLoginErrorMessageAction((error.response.data.msg as string)));

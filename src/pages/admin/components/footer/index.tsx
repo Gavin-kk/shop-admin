@@ -3,7 +3,7 @@ import { FooterWrapper } from './style';
 
 const AdminFooter: FC = (): ReactElement => (
   <FooterWrapper>
-    <h3>推荐使用谷歌浏览器, 以获得更佳体验</h3>
+    <h4>推荐使用谷歌浏览器, 以获得更佳体验</h4>
   </FooterWrapper>
 );
 

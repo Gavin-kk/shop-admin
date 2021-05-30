@@ -8,11 +8,12 @@ import {
   changeCurrentClassifyIdAction,
   getAListOfFirstLevelCategoriesAction,
   getClassifyChildListAction,
-} from '@pages/admin/c-pages/category/store/actions-creators';
-import SetClassify, { UseMethod } from '@pages/admin/c-pages/category/components/set-classify';
+} from '@pages/category/store/actions-creators';
+import ClassifyForm, { UseMethod } from '@pages/category/components/classify-form';
 import { FormInstance } from 'antd/es';
-import GNTable from '@pages/admin/c-pages/category/components/table';
+import GNTable from '@pages/category/components/table';
 import Breadcrumbs, { TitlesType } from '@components/breadcrumbs';
+import { PlusOutlined } from '@ant-design/icons';
 import { CategoryWrapper } from './style';
 
 const Category: FC = (): ReactElement => {
@@ -30,6 +31,12 @@ const Category: FC = (): ReactElement => {
     title: '一级分类',
     click(e:MouseEvent<HTMLElement>) {
       e.preventDefault();
+      // 如果点击了 一级分类面包屑 那就把 currentId 设置为 null
+      dispatch(changeCurrentClassifyIdAction(null));
+      // 点击一级分类面包屑 就重新获取一级分类数据
+      dispatch(getAListOfFirstLevelCategoriesAction);
+
+      // 每次点击1级分类就把他覆盖为初始的只有一条数据的 breadcrumbsConfig
       setBreadcrumbsConfig([{
         title: '一级分类',
         click(e:MouseEvent<HTMLElement>) {
@@ -38,7 +45,6 @@ const Category: FC = (): ReactElement => {
           dispatch(getAListOfFirstLevelCategoriesAction);
         },
       }]);
-      dispatch(getAListOfFirstLevelCategoriesAction);
     },
   }]);
 
@@ -48,12 +54,12 @@ const Category: FC = (): ReactElement => {
     dispatch(changeCurrentClassifyIdAction(id));
     const n = [...breadcrumbsConfig];
     n.push({
-      // title: `${n.length + 1}级分类`,
       title: categoryName,
       // 给每个面包屑 绑定的点击事件
       click(e:MouseEvent<HTMLElement>) {
         e.preventDefault();
         setBreadcrumbsConfig(n);
+        dispatch(changeCurrentClassifyIdAction(id));
         dispatch(getClassifyChildListAction(id));
       },
     });
@@ -76,14 +82,16 @@ const Category: FC = (): ReactElement => {
   }, []);
 
   const handleOk = useCallback((form:FormInstance<any>) => {
-    // 触发表单submit事件
-    form.submit();
-    // 关闭modal框
-    setIsModalVisible(false);
-    // 不能直接清除 否则会导致form表单拿不到数据
-    setTimeout(() => {
-      form.resetFields();// 清除form
-    }, 10);
+    form.validateFields(['categoryName']).then(() => {
+      // 触发表单submit事件
+      form.submit();
+      // 关闭modal框
+      setIsModalVisible(false);
+      // 不能直接清除 否则会导致form表单拿不到数据 并且错误提示也会被清除
+      setTimeout(() => {
+        form.resetFields();// 清除form
+      }, 10);
+    });
   }, []);
 
   const editClassifyClick = useCallback((categoryName:string, id:number) => {
@@ -96,14 +104,14 @@ const Category: FC = (): ReactElement => {
     <CategoryWrapper>
       <Card
         title={<Breadcrumbs childrens={breadcrumbsConfig} />}
-        extra={<Button type="primary" onClick={showModal}>添加</Button>}
+        extra={<Button type="primary" onClick={showModal} icon={<PlusOutlined />}>添加</Button>}
         style={{ width: '100%', height: '100%' }}
       >
         {/* 列表组件 */}
         <GNTable editClassifyClick={editClassifyClick} breadcrumbChange={setBreadcrumbsConfigCallback} />
       </Card>
       {/* 添加用户的弹框 修改用户的弹框 */}
-      <SetClassify
+      <ClassifyForm
         title={alterOrAdd ? '添加分类' : '修改分类'}
         useMethod={alterOrAdd}
         handleCancel={handleCancel}

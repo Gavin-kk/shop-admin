@@ -1,4 +1,6 @@
-import React, { FC, memo, ReactElement } from 'react';
+import React, {
+  FC, memo, ReactElement, useEffect,
+} from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Menu } from 'antd';
 
@@ -11,11 +13,11 @@ const LeftNavbar: FC = (): ReactElement => {
   const history = useHistory<History>();
 
   const processingMenu = (menuList: MenuType[]) => menuList.map((item) => {
-    if (item.children) {
+    if (item.children && item.title !== '商品管理') {
       return (
         <SubMenu key={item.title} icon={item.icon} title={item.title}>
           {/* 如果存在 children 那么就重新调用一下处理menu 把children传入 */}
-          { processingMenu(item.children) }
+          { processingMenu(item.children)}
         </SubMenu>
       );
     }
@@ -32,21 +34,30 @@ const LeftNavbar: FC = (): ReactElement => {
   const expandMenuByDefault = (): string => {
     let title = '';
     adminPageMenuConfig.forEach((item) => {
-      if (item.children) {
+      if (item.children && item.title !== '商品管理') {
         item.children.forEach((itex) => {
-          if (itex.routerPath === window.location.pathname) {
+          if (itex.routerPath === history.location.pathname) {
             title = item.title;
           }
         });
       }
     });
+    // 处理商品管理中的 add edit 等等路由 让他们一律默认展开商品
+    if (history.location.pathname.indexOf('/admin/product') !== -1) {
+      title = '商品';
+    }
     return title;
   };
-    // 判断默认选中哪个菜单项
+
+  // 判断默认选中哪个菜单项
   const processTheSelectedMenuItem = (): string => {
     const path = history.location.pathname;
     if (path === '/admin') {
       return `${path}/home`;
+    }
+    // 处理商品管理中的 add edit 等等路由 让他们一律默认选中 商品管理菜单
+    if (path.indexOf('/admin/product') !== -1) {
+      return '/admin/product';
     }
     return path;
   };

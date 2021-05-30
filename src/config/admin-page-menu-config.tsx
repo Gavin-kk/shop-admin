@@ -37,6 +37,23 @@ const adminPageMenuConfig:MenuType[] = [
         title: '商品管理',
         icon: <SettingOutlined />,
         routerPath: '/admin/product',
+        children: [
+          {
+            title: '添加商品',
+            icon: null,
+            routerPath: '/admin/product/add',
+          },
+          {
+            title: '修改商品',
+            icon: null,
+            routerPath: '/admin/product/edit',
+          },
+          {
+            title: '商品详情',
+            icon: null,
+            routerPath: '/admin/product/detail',
+          },
+        ],
       },
     ],
   },

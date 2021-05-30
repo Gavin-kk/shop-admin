@@ -1,18 +1,19 @@
 import {
   takeEvery, put, ForkEffect, select,
 } from 'redux-saga/effects';
-import { actionType } from '@pages/admin/c-pages/category/store/constant';
+import { actionType } from '@pages/category/store/constant';
 import {
   addClassifyRequest,
   categoryListRequest,
   deleteClassifyRequest, getClassifyChildRequest,
   updateClassifyRequest,
-} from '@src/services/admin-request';
+} from '@src/services/category-request';
 import { AxiosResponse } from 'axios';
 import { message } from 'antd';
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
-import { ICategoryListResponse } from '../typing';
+import { IResponse } from '@src/common/types/sotre-types/response';
+import { ICategory } from '../typing';
 import {
   changeAListOfFirstLevelCategoriesAction,
   getAListOfFirstLevelCategoriesAction, getClassifyChildListAction, getState,
@@ -21,7 +22,7 @@ import {
 // 获取一级分类列表 dispatch 到 reducer 中
 function* getAListOfCategories() {
   try {
-    const result:AxiosResponse<ICategoryListResponse> = yield categoryListRequest();
+    const result:AxiosResponse<IResponse<ICategory[]>> = yield categoryListRequest();
     yield put(changeAListOfFirstLevelCategoriesAction(result.data.data));
   } catch (error) {
     message.error(error.response.data.message);

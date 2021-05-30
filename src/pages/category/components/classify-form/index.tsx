@@ -6,7 +6,7 @@ import {
 } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { FormInstance } from 'antd/lib/form/hooks/useForm';
-import { addClassifyAction, updateChangeClassifyAction } from '@pages/admin/c-pages/category/store/actions-creators';
+import { addClassifyAction, updateChangeClassifyAction } from '@pages/category/store/actions-creators';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
 import { DropDownMenuWrapper } from './style';
@@ -27,7 +27,7 @@ interface IProps {
     row: { value:string, id:number|null}
 }
 
-const SetClassify: FC<IProps> = (props:IProps): ReactElement => {
+const ClassifyForm: FC<IProps> = (props:IProps): ReactElement => {
   const {
     show, handleCancel, handleOk, useMethod, title, row,
   } = props;
@@ -70,11 +70,10 @@ const SetClassify: FC<IProps> = (props:IProps): ReactElement => {
         }
         break;
       default: // 默认为修改
-        // 修改
         dispatch(updateChangeClassifyAction(values.categoryName, (row.id as number)));
         break;
     }
-  }, [dispatch, useMethod, row, classifyList]);
+  }, [dispatch, useMethod, row, currentId]);
 
   const clearForm = useCallback(() => {
     form.resetFields();
@@ -99,12 +98,12 @@ const SetClassify: FC<IProps> = (props:IProps): ReactElement => {
           <Form.Item
             label="新建分类"
             name="parentId"
-            // rules={[{ required: false, message: '' }]}
+            rules={[{ required: false, message: '' }]}
           >
             <Select
               showSearch
               style={{ width: 315 }}
-              placeholder="默认添加本级分类"
+              placeholder="默认添加当前分类"
               optionFilterProp="children"
               allowClear
               filterOption={(input, option) => option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
@@ -118,13 +117,16 @@ const SetClassify: FC<IProps> = (props:IProps): ReactElement => {
           <Form.Item
             label="分类名"
             name="categoryName"
+            initialValue=""
             rules={[{ required: true, message: '分类名称是必填的' }]}
           >
-            <Input placeholder={useMethod === UseMethod.Alter ? row.value : ''} />
+            <Input
+              placeholder={useMethod === UseMethod.Alter ? row.value : ''}
+            />
           </Form.Item>
           {/* 下面这个表单没有任何实际意义 只是因为在修改分类是 form表单内只有一个 input 所以回车会直接触发form的submit事件
               所以在这里加一个隐藏的input */}
-          {/* <input type="text" style={{ display: 'none' }} /> */}
+          <input type="text" style={{ display: 'none' }} />
         </Form>
       </DropDownMenuWrapper>
 
@@ -132,4 +134,4 @@ const SetClassify: FC<IProps> = (props:IProps): ReactElement => {
   );
 };
 
-export default memo(SetClassify);
+export default memo(ClassifyForm);

@@ -24,7 +24,10 @@ const Breadcrumbs: FC<IProps> = (props:IProps): ReactElement => {
     const recursion = (list:MenuType[]) => list.forEach((item) => {
       if (item.children) {
         item.children.forEach((itemx) => {
-          if (itemx.routerPath === location.pathname) {
+          // if (itemx.routerPath === location.pathname) {
+          //   titles.push({ title: item.title });
+          // }
+          if (location.pathname.indexOf((itemx.routerPath as string)) !== -1) {
             titles.push({ title: item.title });
           }
         });
@@ -51,7 +54,7 @@ const Breadcrumbs: FC<IProps> = (props:IProps): ReactElement => {
             ? <NavLink to={item.path}>{ item.title }</NavLink>
             : (
               <a
-                onClick={item.click && item.click.bind(item)}
+                onClick={item.click && item.click}
               >
                 {item.title}
               </a>

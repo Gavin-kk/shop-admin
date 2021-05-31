@@ -24,6 +24,9 @@ export interface IProductState {
     productList:IProduct[]
     searchList:ISearch[]
     detail:IDetails | null
+    addProduct:{
+        currentSelectedClassifyId:number | null
+    }
 }
 
 export interface IRootReducerStateType {

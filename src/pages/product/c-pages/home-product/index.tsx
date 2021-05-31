@@ -4,21 +4,15 @@ import React, {
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { ProductWrapper } from '@pages/product/c-pages/home-product/style';
-import {
-  Button, Card, message,
-} from 'antd';
+import { Button, Card } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
 import GSearch from '@components/search';
 import { useHistory } from 'react-router-dom';
 import GTable from '@pages/product/components/table';
 import { debounce } from '@src/utils/debounce';
-import {
-  getProductListAction,
-  getSearchListAction,
-} from '../../store/action-creators';
+import { getProductListAction, getSearchListAction } from '../../store/action-creators';
 
-const timer:number | null = null;
 const HomeProduct: FC = (): ReactElement => {
   const { searchList } = useSelector((state: IRootReducerStateType) => ({
     searchList: state.product.searchList,
@@ -48,6 +42,9 @@ const HomeProduct: FC = (): ReactElement => {
     debounce(800, getSearchData)();
   }, [dispatch]);
 
+  const jumpToAddProductRouting = () => {
+    history.push('/admin/product/add');
+  };
   return (
     <ProductWrapper>
       <Card
@@ -61,9 +58,12 @@ const HomeProduct: FC = (): ReactElement => {
             handleSearch={handleSearch}
             placeholder="可通过商品名或商品描述搜索商品"
           />
-)}
-        extra={<Button type="primary" icon={<PlusOutlined />}>添加</Button>}
-        style={{ width: '100%', height: '100%' }}
+        )}
+        extra={<Button type="primary" icon={<PlusOutlined />} onClick={jumpToAddProductRouting}>添加</Button>}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
       >
         {/* 表格 */}
         <GTable />

@@ -33,3 +33,16 @@ export function getGoodsDetailRequest(id:number):Promise<AxiosResponse<any>> {
     },
   });
 }
+
+// 获取所有父分类数据
+export function getParentCategoryRequest():Promise<AxiosResponse<any>> {
+  return request.get('/classify/list');
+}
+// 获取所有分类数据
+export function getCategoryRequest(id:number):Promise<AxiosResponse<any>> {
+  return request.get('/classify/child', {
+    params: {
+      id,
+    },
+  });
+}

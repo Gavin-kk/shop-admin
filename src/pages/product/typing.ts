@@ -12,6 +12,8 @@
 // }
 
 // 商品数据的类型
+import { IResponse } from '@src/common/types/sotre-types/response';
+
 export interface IProduct{
     id: number;
     name: string;
@@ -48,5 +50,20 @@ export interface IDetails {
     detail: string;
     createAt: string;
     updateAt: string;
-    classifyName: string;
+    classifyName: string[];
+}
+
+// 文件上传相应的数据类型
+export interface IUploadDate {
+    names: string[];
+    imgPath: string[];
+}
+
+// 添加商品页面 请求的分类数据的类型
+export interface IClassify {
+    id: number;
+    parentId: number | null;
+    categoryName: string;
+    createAt: string;
+    updateAt: string;
 }

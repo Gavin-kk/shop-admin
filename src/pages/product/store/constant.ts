@@ -6,5 +6,6 @@ export enum ActionType {
     GET_SEARCH_LIST = 'get_search_list',
     CHANGE_SEARCH_LIST='change_search_list',
     GET_GOODS_DETAIL='get_goods_detail',
-    CHANGE_GOODS_DETAIL='change_goods_detail'
+    CHANGE_GOODS_DETAIL='change_goods_detail',
+    CHANGE_CURRENT_CASCADE_SELECTION='change_current_cascade_selection'
 }

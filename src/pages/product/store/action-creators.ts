@@ -46,3 +46,11 @@ export const changeGoodsDetailAction = (data:IDetails):IActionType => ({
   type: ActionType.CHANGE_GOODS_DETAIL,
   data,
 });
+
+// 更改添加商品页面的级联选择器 当前选择谁
+export const changeCurrentSelectedAction = (index:number):IActionType => ({
+  type: ActionType.CHANGE_CURRENT_CASCADE_SELECTION,
+  data: {
+    index,
+  },
+});

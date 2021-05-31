@@ -8,7 +8,11 @@ const defaultState:IProductState = {
   productList: [],
   searchList: [],
   detail: null,
+  addProduct: {
+    currentSelectedClassifyId: null,
+  },
 };
+
 function reducer(state = defaultState, action:IActionType):IProductState {
   return produce(state, (draft:WritableDraft<IProductState>) => {
     switch (action.type) {
@@ -20,6 +24,9 @@ function reducer(state = defaultState, action:IActionType):IProductState {
         return draft;
       case ActionType.CHANGE_GOODS_DETAIL:
         draft.detail = action.data;
+        return draft;
+      case ActionType.CHANGE_CURRENT_CASCADE_SELECTION:
+        draft.addProduct.currentSelectedClassifyId = action.data.index;
         return draft;
       default:
         return draft;

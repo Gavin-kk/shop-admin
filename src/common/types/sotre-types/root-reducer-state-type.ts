@@ -1,9 +1,12 @@
-import { CombinedState, Reducer } from 'redux';
+import { AnyAction, CombinedState, Reducer } from 'redux';
 
 import { User } from '@pages/login/typing';
 import { IDefaultData } from '@src/components/weather/store/reducer';
 import { ICategory } from '@src/pages/category/typing';
-import { IDetails, IProduct, ISearch } from '@src/pages/product/typing';
+import {
+  IDetails, IProduct, ISearch, IUploadDate,
+} from '@src/pages/product/typing';
+import { RouterState } from 'react-router-redux';
 import { IActionType } from './action-type';
 
 // 登录页面的 reducer 数据的状态
@@ -26,6 +29,8 @@ export interface IProductState {
     detail:IDetails | null
     addProduct:{
         currentSelectedClassifyId:number | null
+        richTextEditorContent:string | null
+        UploadUrlList:IUploadDate | null
     }
 }
 
@@ -36,4 +41,4 @@ export interface IRootReducerStateType {
     product:IProductState
 }
 
-export type ReducerType = Reducer<CombinedState<IRootReducerStateType>, IActionType>
+export type ReducerType = Reducer<CombinedState<{auth: ILoginState, weather: IDefaultData, classify: ICategoryState, product: IProductState}>, IActionType>

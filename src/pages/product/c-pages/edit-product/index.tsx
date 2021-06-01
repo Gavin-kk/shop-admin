@@ -1,9 +1,13 @@
-import React, { FC, ReactElement, memo } from 'react';
+import React, { FC, memo, ReactElement } from 'react';
+import DetailsModification, { Method } from '@pages/product/components/details-modification';
+import { useLocation } from 'react-router-dom';
 
 const EditProduct: FC = (): ReactElement => {
-  const a = 0;
+  const location = useLocation<number>();
+  const id:number = location.state;
+  console.log(id);
   return (
-    <h2>EditProduct</h2>
+    <DetailsModification method={Method.EDIT} editId={id} />
   );
 };
 

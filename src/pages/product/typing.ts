@@ -56,7 +56,7 @@ export interface IDetails {
 // 文件上传相应的数据类型
 export interface IUploadDate {
     names: string[];
-    imgPath: string[];
+    urls: string[];
 }
 
 // 添加商品页面 请求的分类数据的类型

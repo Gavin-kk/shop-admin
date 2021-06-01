@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { SubmitType } from '@pages/product/components/details-modification';
 import request from './request';
 // 查询所有商品的数据和商品所属的分类
 export function getProductRequest(): Promise<AxiosResponse<any>> {
@@ -45,4 +46,17 @@ export function getCategoryRequest(id:number):Promise<AxiosResponse<any>> {
       id,
     },
   });
+}
+
+// 删除图片
+export function deletePictureRequest(name:string):Promise<AxiosResponse<any>> {
+  return request.delete('/upload/delete', {
+    params: {
+      name,
+    },
+  });
+}
+// 添加商品
+export function addingGoodsRequest(submit:SubmitType):Promise<AxiosResponse<any>> {
+  return request.post('/commodity/add', submit);
 }

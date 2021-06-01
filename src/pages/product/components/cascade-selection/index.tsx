@@ -10,21 +10,12 @@ import { IResponse } from '@src/common/types/sotre-types/response';
 import { changeCurrentSelectedAction } from '../../store/action-creators';
 import { IClassify } from '../../typing';
 
-const optionLists = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    isLeaf: false,
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    isLeaf: false,
-  },
-];
+interface IProps {
+  placeholder?:string[]
+}
 
-const CascadeSelection: FC = (): ReactElement => {
-  const [options, setOptions] = useState<CascaderOptionType[]>(optionLists);
+const CascadeSelection: FC<IProps> = ({ placeholder }): ReactElement => {
+  const [options, setOptions] = useState<CascaderOptionType[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -72,8 +63,29 @@ const CascadeSelection: FC = (): ReactElement => {
     isLeaf: false,
   }));
 
+  const handlePlaceholder = ():string | null => {
+    let str = '';
+    if (placeholder) {
+      placeholder.forEach((item, index) => {
+        if (index === placeholder.length - 1) {
+          str += item;
+        } else {
+          str += `${item} / `;
+        }
+      });
+      return str;
+    }
+    return null;
+  };
+
   return (
-    <Cascader options={options} loadData={loadData} onChange={onChange} changeOnSelect placeholder="请选择分类" />
+    <Cascader
+      options={options}
+      loadData={loadData}
+      onChange={onChange}
+      changeOnSelect
+      placeholder={handlePlaceholder() || '请选择分类'}
+    />
   );
 };
 

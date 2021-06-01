@@ -1,5 +1,5 @@
 import React, {
-  FC, memo, ReactElement, useEffect,
+  FC, memo, ReactElement,
 } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Menu } from 'antd';

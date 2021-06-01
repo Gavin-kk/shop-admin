@@ -10,6 +10,8 @@ const defaultState:IProductState = {
   detail: null,
   addProduct: {
     currentSelectedClassifyId: null,
+    richTextEditorContent: null,
+    UploadUrlList: null,
   },
 };
 
@@ -27,6 +29,12 @@ function reducer(state = defaultState, action:IActionType):IProductState {
         return draft;
       case ActionType.CHANGE_CURRENT_CASCADE_SELECTION:
         draft.addProduct.currentSelectedClassifyId = action.data.index;
+        return draft;
+      case ActionType.CHANGE_RICH_TEXT_EDITOR_CONTENT:
+        draft.addProduct.richTextEditorContent = action.data;
+        return draft;
+      case ActionType.CHANGE_UPLOAD_IMG_PATH:
+        draft.addProduct.UploadUrlList = action.data;
         return draft;
       default:
         return draft;

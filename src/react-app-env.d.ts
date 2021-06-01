@@ -4,6 +4,4 @@ interface Window {
     AMap: any
 }
 
-declare module 'jsonp'
-
 declare module 'skycons'

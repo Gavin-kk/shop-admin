@@ -98,11 +98,14 @@ const GTable: FC = (): ReactElement => {
         const viewProductDetails = () => {
           history.push(`/admin/product/detail/${rowData.id}`);
         };
+        const modifyTheProduct = () => {
+          history.push('/admin/product/edit', rowData.id);
+        };
 
         return (
           <StatusButtonWrapper>
             <Button type="primary" className="separate" size="small" onClick={viewProductDetails}>详情</Button>
-            <Button type="primary" size="small">修改</Button>
+            <Button type="primary" size="small" onClick={modifyTheProduct}>修改</Button>
           </StatusButtonWrapper>
         );
       },

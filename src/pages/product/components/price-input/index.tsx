@@ -1,8 +1,8 @@
 import React, {
-  FC, ReactElement, memo, useState,
+  FC, ReactElement, memo, useState, useEffect,
 } from 'react';
 import {
-  Form, Input, Select, Button,
+  Input, Select,
 } from 'antd';
 
 const { Option } = Select;
@@ -17,18 +17,18 @@ interface PriceValue {
 interface PriceInputProps {
   value?: PriceValue;
   onChange?: (value: PriceValue) => void;
+  initValue?: number
 }
 
-const PriceInput: FC<PriceInputProps> = ({ value = {}, onChange }): ReactElement => {
-  const [number, setNumber] = useState(0);
+const PriceInput: FC<PriceInputProps> = ({ initValue, value = {}, onChange }): ReactElement => {
+  const [number, setNumber] = useState<number>();
   const [currency, setCurrency] = useState<Currency>('rmb');
 
-  const triggerChange = (changedValue: { number?: number; currency?: Currency }) => {
+  const triggerChange = (changedValue: PriceValue) => {
     onChange?.({
       number, currency, ...value, ...changedValue,
     });
   };
-
   const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newNumber = parseInt(e.target.value || '0', 10);
     if (Number.isNaN(number)) {
@@ -52,7 +52,8 @@ const PriceInput: FC<PriceInputProps> = ({ value = {}, onChange }): ReactElement
         type="text"
         value={value.number || number}
         onChange={onNumberChange}
-        style={{ width: 100 }}
+        style={{ width: 200 }}
+        placeholder={initValue ? String(initValue) : '请输入价格'}
       />
       <Select
         value={value.currency || currency}

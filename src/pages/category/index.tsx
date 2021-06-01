@@ -26,6 +26,10 @@ const Category: FC = (): ReactElement => {
   // 是否显示修改分类弹框
   const [alterOrAdd, setAlterOrAdd] = useState<UseMethod>(UseMethod.Add);
 
+  useEffect(() => {
+    dispatch(getAListOfFirstLevelCategoriesAction);
+  }, []);
+
   // 面包屑添加的数据
   const [breadcrumbsConfig, setBreadcrumbsConfig] = useState<TitlesType[]>([{
     title: '一级分类',
@@ -65,10 +69,6 @@ const Category: FC = (): ReactElement => {
     });
     setBreadcrumbsConfig(n);
   }, [breadcrumbsConfig]);
-
-  useEffect(() => {
-    dispatch(getAListOfFirstLevelCategoriesAction);
-  }, []);
 
   // 让添加的分类的弹框显示
   const showModal = useCallback(() => {

@@ -30,7 +30,7 @@ export const momentConfig:any = {
     // '中午'
     return hour >= 11 ? hour : hour + 12;
   },
-  meridiem(hour:any, minute:any, isLower:any) {
+  meridiem(hour:any, minute:any) {
     const hm = hour * 100 + minute;
     if (hm < 600) {
       return '凌晨';

@@ -1,6 +1,6 @@
 import { RouteConfigComponentProps } from 'react-router-config';
 import React, {
-  FC, memo, ReactElement, useEffect, useState,
+  FC, memo, ReactElement, useEffect, useState, Fragment,
 } from 'react';
 import {
   Card, Image, List, Spin, Tag,
@@ -45,22 +45,24 @@ const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfig
   }, [detail]);
 
   const imgs = detail ? JSON.parse(detail.imgs) as string[] : 'null';
-
   const category = () => (detail ? detail.classifyName.map((item: string, index: number) => {
     if (index === detail.classifyName.length - 1) {
       return (
-        <Tag key={item} className="classify">
-          {item}
-        </Tag>
+        <Fragment key={item}>
+          <Tag className="classify">
+            {item}
+          </Tag>
+        </Fragment>
+
       );
     }
     return (
-      <>
-        <Tag key={item} className="classify">
+      <Fragment key={item}>
+        <Tag className="classify">
           {item}
         </Tag>
         <span style={{ paddingRight: 6 }}>{'>'}</span>
-      </>
+      </Fragment>
     );
   }) : null);
   return (
@@ -68,7 +70,6 @@ const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfig
       title={<Breadcrumbs />}
       style={{
         width: '100%',
-        height: 750,
       }}
     >
       {detail && (
@@ -76,7 +77,6 @@ const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfig
           <Spin className="detail-loading" spinning={whetherToLoad} delay={200} />
           <List
             size="large"
-            bordered
           >
             <List.Item>
               <span>商品名称 ：</span>
@@ -98,7 +98,7 @@ const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfig
               <div className="img">
                 {(imgs as string[]).length ? (imgs as string[]).map((item) => (
                   <Image
-                    key={item.replace(',', '')}
+                    key={item}
                     width={200}
                     src={item.replace(',', '')}
                     fallback={errorImg}

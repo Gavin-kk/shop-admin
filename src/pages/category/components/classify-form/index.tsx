@@ -1,9 +1,7 @@
 import React, {
-  FC, ReactElement, memo, useCallback, useState,
+  FC, ReactElement, memo, useCallback,
 } from 'react';
-import {
-  Cascader, Form, Input, Select,
-} from 'antd';
+import { Form, Input, Select } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { FormInstance } from 'antd/lib/form/hooks/useForm';
 import { addClassifyAction, updateChangeClassifyAction } from '@pages/category/store/actions-creators';
@@ -40,20 +38,6 @@ const ClassifyForm: FC<IProps> = (props:IProps): ReactElement => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  /* const addClassify = useCallback((values: { categoryName:string, parentId:number | undefined }) => {
-    if (!values.parentId) {
-      if (useMethod === UseMethod.Add) {
-        // 添加一级分类
-        dispatch(addClassifyAction(null, values.categoryName));
-      } else {
-        // 修改
-        dispatch(updateChangeClassifyAction(values.categoryName, (row.id as number)));
-      }
-    } else if (values.parentId && useMethod === UseMethod.Add) {
-      // 添加多级分类
-      dispatch(addClassifyAction(values.parentId, values.categoryName));
-    }
-  }, [dispatch, useMethod, row]); */
   const addClassify = useCallback((values: { categoryName:string, parentId:number | undefined }) => {
     switch (true) {
       case useMethod === UseMethod.Add:

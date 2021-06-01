@@ -4,12 +4,18 @@ import {
 import { ActionType } from '@pages/product/store/constant';
 import { AxiosResponse } from 'axios';
 import {
-  getProductRequest, changeProductStatusRequest, searchProductsRequest, getGoodsDetailRequest,
+  getProductRequest,
+  changeProductStatusRequest,
+  searchProductsRequest,
+  getGoodsDetailRequest,
+  deletePictureRequest,
+  addingGoodsRequest,
 } from '@src/services/product-request';
 import { IResponse } from '@src/common/types/sotre-types/response';
 import { message } from 'antd';
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { AVAILABLE, TAKE_THE_PRODUCT_OFF_THE_SHELF } from '@src/common/constant/product-constant';
+import { SubmitType } from '@pages/product/components/details-modification';
 import { IDetails, IProduct, ISearch } from '../typing';
 import {
   changeGoodsDetailAction,
@@ -72,12 +78,36 @@ function* getGoodsDetail(action:IActionType) {
     yield message.error(error.response.data.message || error.response.data.msg);
   }
 }
+
+function* deleteUploadedImage(action:IActionType) {
+  const { name } = action.data;
+  try {
+    yield deletePictureRequest(name);
+    message.success('删除成功');
+  } catch (error) {
+    message.error(error.response.data.msg || error.response.data.message);
+  }
+}
+
+function* addProduct(action:IActionType) {
+  const submit:SubmitType = action.data;
+  try {
+    yield addingGoodsRequest(submit);
+    window.history.back();
+    message.success('添加成功');
+  } catch (error) {
+    message.error(error.response.data.message || error.response.data.msg);
+  }
+}
+
 function* saga(): Generator<ForkEffect<never>> {
   yield takeEvery(ActionType.GET_PRODUCT_LIST, getProductList);
   yield takeEvery(ActionType.SEND_NOW_ON_SHELF, sendNowOnShelf);
   yield takeEvery(ActionType.SEND_OFF_SHELF, offShelf);
   yield takeEvery(ActionType.GET_SEARCH_LIST, getSearch);
   yield takeEvery(ActionType.GET_GOODS_DETAIL, getGoodsDetail);
+  yield takeEvery(ActionType.DELETE_UPLOAD_IMG, deleteUploadedImage);
+  yield takeEvery(ActionType.ADD_PRODUCT, addProduct);
 }
 
 export default saga;

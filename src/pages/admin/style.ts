@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AdminWrapper = styled.div`
-  height:100%;
+  //height:100%;
   
   .layout {
     position: fixed;
@@ -13,7 +13,7 @@ export const AdminWrapper = styled.div`
   }
   
   .ant-layout-has-sider {
-    height: 100%;
+    //height: 100%;
   }
   
   .ant-layout-sider {

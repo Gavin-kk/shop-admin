@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { WritableDraft } from 'immer/dist/internal';
-import { IProductState } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IProductState } from '@src/common/types/sotre-types/reducer.interface';
 import { ActionType } from '@pages/product/store/constant';
 
 const defaultState:IProductState = {

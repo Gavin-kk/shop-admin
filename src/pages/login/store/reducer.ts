@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 
 import { IActionType } from '@src/common/types/sotre-types/action-type';
-import { ILoginState } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { ILoginState } from '@src/common/types/sotre-types/reducer.interface';
 
 import { WritableDraft } from 'immer/dist/internal';
 

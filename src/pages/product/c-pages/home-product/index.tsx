@@ -6,7 +6,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { ProductWrapper } from '@pages/product/c-pages/home-product/style';
 import { Button, Card } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import GSearch from '@components/search';
 import { useHistory } from 'react-router-dom';
 import GTable from '@pages/product/components/table';

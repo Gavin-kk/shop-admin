@@ -6,7 +6,7 @@ import {
   Button, Popconfirm, Table,
 } from 'antd';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { ICategory } from '@pages/category/typing';
 import { AddButtonNodeWrapper } from './style';
 import { deleteClassifyAction, getClassifyChildListAction } from '../../store/actions-creators';

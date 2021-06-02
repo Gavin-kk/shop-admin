@@ -3,7 +3,7 @@ import { WritableDraft } from 'immer/dist/internal';
 
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { actionType } from '@pages/category/store/constant';
-import { ICategoryState } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { ICategoryState } from '@src/common/types/sotre-types/reducer.interface';
 
 const defaultData: ICategoryState = {
   classifyList: [],

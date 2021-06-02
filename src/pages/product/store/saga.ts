@@ -10,6 +10,7 @@ import {
   getGoodsDetailRequest,
   deletePictureRequest,
   addingGoodsRequest,
+  updateProductRequest,
 } from '@src/services/product-request';
 import { IResponse } from '@src/common/types/sotre-types/response';
 import { message } from 'antd';
@@ -100,6 +101,17 @@ function* addProduct(action:IActionType) {
   }
 }
 
+function* updateProduct(action:IActionType) {
+  const summit:SubmitType = action.data;
+  try {
+    yield updateProductRequest(summit);
+    window.history.back();
+    message.success('更新成功');
+  } catch (error) {
+    message.error(error.response.data.message || error.response.data.msg);
+  }
+}
+
 function* saga(): Generator<ForkEffect<never>> {
   yield takeEvery(ActionType.GET_PRODUCT_LIST, getProductList);
   yield takeEvery(ActionType.SEND_NOW_ON_SHELF, sendNowOnShelf);
@@ -108,6 +120,7 @@ function* saga(): Generator<ForkEffect<never>> {
   yield takeEvery(ActionType.GET_GOODS_DETAIL, getGoodsDetail);
   yield takeEvery(ActionType.DELETE_UPLOAD_IMG, deleteUploadedImage);
   yield takeEvery(ActionType.ADD_PRODUCT, addProduct);
+  yield takeEvery(ActionType.UPDATE_PRODUCT, updateProduct);
 }
 
 export default saga;

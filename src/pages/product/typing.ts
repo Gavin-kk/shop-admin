@@ -50,7 +50,7 @@ export interface IDetails {
     detail: string;
     createAt: string;
     updateAt: string;
-    classifyName: string[];
+    classifyName: { name:string, id:number }[];
 }
 
 // 文件上传相应的数据类型

@@ -12,4 +12,5 @@ export enum ActionType {
     CHANGE_RICH_TEXT_EDITOR_CONTENT='change_rich_text_editor_content',
     CHANGE_UPLOAD_IMG_PATH='change_upload_img_path',
     ADD_PRODUCT='add_product',
+    UPDATE_PRODUCT='update_goods'
 }

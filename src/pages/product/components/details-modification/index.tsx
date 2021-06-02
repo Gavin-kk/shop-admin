@@ -7,7 +7,7 @@ import {
 } from 'antd';
 import PriceInput from '@pages/product/components/price-input';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { ValidateStatus } from 'antd/lib/form/FormItem';
 import RichTextEditor from '@components/rich-text-editor';
 import { AddGoodsWrapper } from './style';
@@ -17,7 +17,7 @@ import {
   addingGoodsAction,
   changeCurrentSelectedAction, changeGoodsDetailAction,
   changeTheContentOfTheRichTextEditorAction,
-  changeUploadUrlListAction, getGoodsDetailAction,
+  changeUploadUrlListAction, getGoodsDetailAction, updateGoodsAction,
 } from '../../store/action-creators';
 
 export type Price ={
@@ -37,9 +37,10 @@ export interface SubmitType {
   desc: string;
   imgs: string[] | undefined;
   status: string;
-  classifyId: number | null;
+  classifyId?: number | null;
   price: number;
   detail: string | null;
+  id?:number
 }
 
 export enum Method {
@@ -82,8 +83,21 @@ const DetailsModification: FC<IProps> = (props:IProps): ReactElement => {
   }, []);
 
   useEffect(() => {
+    if (method === Method.EDIT) {
+      form.setFieldsValue(
+        {
+          price:
+            { number: detail?.price },
+          name: detail?.name,
+          desc: detail?.desc,
+        },
+      );
+    }
+  }, [detail]);
+
+  useEffect(() => {
     if (currentSelectedClassifyId) {
-      form.validateFields();
+      form.validateFields(['classify']);
     }
   }, [currentSelectedClassifyId]);
 
@@ -105,7 +119,13 @@ const DetailsModification: FC<IProps> = (props:IProps): ReactElement => {
       price: price.number,
       detail: richTextEditorContent,
     };
-    dispatch(addingGoodsAction(submitObj));
+    if (method === Method.ADD) {
+      dispatch(addingGoodsAction(submitObj));
+    } else {
+      delete submitObj.classifyId;
+      submitObj.id = editId;
+      dispatch(updateGoodsAction(submitObj));
+    }
   };
 
   const validationCategorySelection = ():Promise<void> => {
@@ -117,13 +137,14 @@ const DetailsModification: FC<IProps> = (props:IProps): ReactElement => {
     return Promise.resolve();
   };
   const isEdit = !!(method === Method.EDIT && detail);
-
+  // 处理价格是添加还是修改
   const priceComponentProcessing = () => (isEdit ? (
     <PriceInput initValue={parseInt((detail!.price), 10)} />
   ) : <PriceInput />);
-
+  // 处理图片上传默认显示那个
   const processImageUploadDefaultData = () => (isEdit ? <GUpload imgs={JSON.parse(detail!.imgs) as string[]} /> : <GUpload imgs={[]} />);
-
+  // 处理级联选择
+  const handlingCascadeSelection = () => (isEdit ? <CascadeSelection defaultSelection={detail!.classifyName} /> : <CascadeSelection />);
   return (
     <Card
       title={<Breadcrumbs />}
@@ -141,7 +162,8 @@ const DetailsModification: FC<IProps> = (props:IProps): ReactElement => {
             rules={[{ required: true, message: '请输入商品名称', whitespace: true }]}
             name="name"
           >
-            <Input placeholder={method === Method.EDIT ? detail?.name : '请输入商品名称'} />
+            <Input />
+            {/* placeholder={method === Method.EDIT ? detail?.name : '请输入商品名称'} */}
           </Form.Item>
           <Form.Item
             label="商品描述"
@@ -162,19 +184,17 @@ const DetailsModification: FC<IProps> = (props:IProps): ReactElement => {
             label="商品分类"
             rules={[{ validator: validationCategorySelection, required: true }]}
             validateStatus={classifyValidateStatus}
+            shouldUpdate
             name="classify"
           >
             {/* 级联选择 */}
-            <CascadeSelection placeholder={detail?.classifyName} />
+            {handlingCascadeSelection()}
           </Form.Item>
           <Form.Item
             label="商品图片"
           >
             {/* 图片上传 */}
-            {
-              processImageUploadDefaultData()
-            }
-
+            {processImageUploadDefaultData()}
           </Form.Item>
           <Form.Item
             label="商品详情"

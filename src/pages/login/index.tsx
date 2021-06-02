@@ -6,7 +6,7 @@ import React, {
 import { useSelector, shallowEqual } from 'react-redux';
 
 // 类型
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { PageProps } from '@src/common/types/router-component-props-type';
 
 // 组件和样式
@@ -19,18 +19,17 @@ import { LoginWrapper } from './style';
 
 const Login: FC<PageProps> = (props:PageProps): ReactElement => {
   const { history } = props;
-
-  const { errMsg, whetherToLogIn } = useSelector((state:IRootReducerStateType) => ({
+  const { errMsg, isLogin } = useSelector((state:IRootReducerStateType) => ({
     errMsg: state.auth.loginErrMsg,
-    whetherToLogIn: state.auth.whetherToLogIn,
+    isLogin: state.auth.whetherToLogIn,
   }), shallowEqual);
 
   useEffect(() => {
     const token:string | null = localStorage.getItem(USER_KEY);
-    if (token && whetherToLogIn) {
+    if (token) {
       history.replace('/admin');
     }
-  }, [whetherToLogIn]);
+  }, [isLogin]);
 
   return (
     <LoginWrapper>

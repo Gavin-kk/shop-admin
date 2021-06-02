@@ -60,3 +60,7 @@ export function deletePictureRequest(name:string):Promise<AxiosResponse<any>> {
 export function addingGoodsRequest(submit:SubmitType):Promise<AxiosResponse<any>> {
   return request.post('/commodity/add', submit);
 }
+// 更新商品
+export function updateProductRequest(submit:SubmitType):Promise<AxiosResponse<any>> {
+  return request.put('/commodity/update', submit);
+}

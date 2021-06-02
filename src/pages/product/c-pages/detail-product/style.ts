@@ -10,8 +10,9 @@ export const ListWrapper = styled.div`
       .detail-desc {
         display: flex;
         align-items: center;
-        font-weight: bold;
-        font-size: 15px;
+        //font-weight: bold;
+        //font-size: 15px;
+        margin-left: 35px;
         min-width: 120px;
       }
       .detail {
@@ -30,8 +31,9 @@ export const ListWrapper = styled.div`
   .ant-list-item > span:first-of-type {
     display: inline-block;
     min-width:120px;
-    font-weight: bold;
-    font-size: 15px;
+    margin-left: 35px;
+    //font-weight: bold;
+    //font-size: 15px;
   }
 
   .img-item {

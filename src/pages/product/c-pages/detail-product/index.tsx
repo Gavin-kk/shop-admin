@@ -8,7 +8,7 @@ import {
 import Breadcrumbs from '@components/breadcrumbs';
 import { errorImg } from '@assets/img/img-error';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import moment from 'moment';
 import { momentConfig } from '@src/config/moment-config';
 import { ListWrapper } from './style';
@@ -45,21 +45,21 @@ const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfig
   }, [detail]);
 
   const imgs = detail ? JSON.parse(detail.imgs) as string[] : 'null';
-  const category = () => (detail ? detail.classifyName.map((item: string, index: number) => {
+  const category = () => (detail ? detail.classifyName.map((item, index: number) => {
     if (index === detail.classifyName.length - 1) {
       return (
-        <Fragment key={item}>
+        <Fragment key={item.id}>
           <Tag className="classify">
-            {item}
+            {item.name}
           </Tag>
         </Fragment>
 
       );
     }
     return (
-      <Fragment key={item}>
+      <Fragment key={item.id}>
         <Tag className="classify">
-          {item}
+          {item.name}
         </Tag>
         <span style={{ paddingRight: 6 }}>{'>'}</span>
       </Fragment>
@@ -107,16 +107,6 @@ const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfig
               </div>
             </List.Item>
             <List.Item>
-              <div className="detail-box">
-                <div className="detail-desc">
-                  商品详情 ：
-                </div>
-                <div className="detail">
-                  <p>{detail.detail}</p>
-                </div>
-              </div>
-            </List.Item>
-            <List.Item>
               <span>所属分类 ：</span>
               {category()}
             </List.Item>
@@ -133,6 +123,15 @@ const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfig
                 {moment(parseInt(detail.updateAt, 10) * 1000)
                   .format('llll')}
               </span>
+            </List.Item>
+            <List.Item>
+              <div className="detail-box">
+                <div className="detail-desc">
+                  商品详情 ：
+                </div>
+                {/* eslint-disable-next-line react/no-danger */}
+                {detail.detail ? <div className="detail" dangerouslySetInnerHTML={{ __html: detail.detail }} /> : <div>null</div> }
+              </div>
             </List.Item>
           </List>
         </ListWrapper>

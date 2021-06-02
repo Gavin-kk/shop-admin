@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
 import Skycons, { SkyconsType } from 'react-skycons';
 
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 
 import { weatherIconArr } from '@src/config/weather-icon';
 import { getWeatherInfoAction } from '@components/weather/store/action-creators';

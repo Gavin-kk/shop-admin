@@ -10,7 +10,7 @@ import { offShelfAction, sendNowOnShelfAction } from '@pages/product/store/actio
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { deduplication } from '@utils/array-deduplication';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { useHistory } from 'react-router-dom';
 import { StatusButtonWrapper } from './style';
 

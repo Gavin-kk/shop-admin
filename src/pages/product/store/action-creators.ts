@@ -44,7 +44,7 @@ export const getGoodsDetailAction = (id:number):IActionType => ({
   type: ActionType.GET_GOODS_DETAIL,
   data: { id },
 });
-// 更改reducer中的数据
+// 更改商品详细信息操作
 export const changeGoodsDetailAction = (data:IDetails | null):IActionType => ({
   type: ActionType.CHANGE_GOODS_DETAIL,
   data,
@@ -80,5 +80,11 @@ export const changeUploadUrlListAction = (list:IUploadDate | null):IActionType =
 // 添加商品
 export const addingGoodsAction = (data:SubmitType):IActionType => ({
   type: ActionType.ADD_PRODUCT,
+  data,
+});
+
+// 更新商品
+export const updateGoodsAction = (data:SubmitType):IActionType => ({
+  type: ActionType.UPDATE_PRODUCT,
   data,
 });

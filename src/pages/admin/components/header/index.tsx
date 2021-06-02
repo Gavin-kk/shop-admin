@@ -8,7 +8,7 @@ import { message, Popconfirm } from 'antd';
 import LocalStorage from '@utils/local-storage-utils';
 import { USER_KEY } from '@src/common/constant/auth-constant';
 import { changeLoginStateAction, changeUserInfoAction } from '@pages/login/store/actions-creators';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 
 import MyDate from '@components/date';
 // import Weather from '@components/weather';

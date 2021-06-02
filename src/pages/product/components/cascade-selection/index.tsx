@@ -11,11 +11,12 @@ import { changeCurrentSelectedAction } from '../../store/action-creators';
 import { IClassify } from '../../typing';
 
 interface IProps {
-  placeholder?:string[]
+  defaultSelection?: { name:string, id:number }[]
 }
 
-const CascadeSelection: FC<IProps> = ({ placeholder }): ReactElement => {
+const CascadeSelection: FC<IProps> = ({ defaultSelection }): ReactElement => {
   const [options, setOptions] = useState<CascaderOptionType[]>([]);
+  const [values, setValue] = useState<(string | number)[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,8 +24,16 @@ const CascadeSelection: FC<IProps> = ({ placeholder }): ReactElement => {
     getListOfParentCategories();
   }, []);
 
+  useEffect(() => {
+    if (defaultSelection) {
+      setValue(handledefaultSelection(defaultSelection));
+      dispatch(changeCurrentSelectedAction(defaultSelection[defaultSelection.length - 1].id));
+    }
+  }, [defaultSelection]);
+
   // 级联选择器变化时触发
   const onChange = (value:CascaderValueType) => {
+    setValue(value);
     dispatch(changeCurrentSelectedAction((value as number[])[value.length - 1]));
   };
   // 获取0级分类
@@ -63,30 +72,27 @@ const CascadeSelection: FC<IProps> = ({ placeholder }): ReactElement => {
     isLeaf: false,
   }));
 
-  const handlePlaceholder = ():string | null => {
-    let str = '';
-    if (placeholder) {
-      placeholder.forEach((item, index) => {
-        if (index === placeholder.length - 1) {
-          str += item;
-        } else {
-          str += `${item} / `;
-        }
+  const handledefaultSelection = (defaultSelection:any[] | undefined):string[] => {
+    const arr:string[] = [];
+    if (defaultSelection) {
+      defaultSelection.forEach((item) => {
+        arr.push(item.name);
       });
-      return str;
     }
-    return null;
+    return arr;
   };
-
   return (
     <Cascader
+      // defaultValue={handledefaultSelection()}
+      value={values}
       options={options}
       loadData={loadData}
       onChange={onChange}
       changeOnSelect
-      placeholder={handlePlaceholder() || '请选择分类'}
+      placeholder="请选择分类"
     />
   );
+  // handlePlaceholder() ||
 };
 
 export default memo(CascadeSelection);

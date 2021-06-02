@@ -27,6 +27,7 @@ function* sendLoginRequest(action: IActionType) {
     yield message.success('登录成功');
     // 错误
   } catch (error:any) {
+    yield put(changeLoginStateAction(false));
     yield put(changeLoginErrorMessageAction((error.response.data.msg as string)));
   }
 }
@@ -37,9 +38,10 @@ function* getUserInfo() {
     yield put(changeUserInfoAction(result.data.data));
     yield put(changeLoginStateAction(true));
   } catch (error:any) {
-    message.error(error.response.data.msg || error.response.data.message);
     LocalStorage.removePermanentlyStoreData(USER_KEY);
     yield put(changeLoginStateAction(false));
+    // yield message.error(error.response.data.msg || error.response.data.message);
+    yield message.error('授权失效');
   }
 }
 

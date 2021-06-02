@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactElement, memo, useState, useEffect,
+  FC, ReactElement, memo, useState,
 } from 'react';
 import {
   Input, Select,

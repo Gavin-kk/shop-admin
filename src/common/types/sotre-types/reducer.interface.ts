@@ -7,6 +7,7 @@ import {
   IDetails, IProduct, ISearch, IUploadDate,
 } from '@src/pages/product/typing';
 import { RouterState } from 'react-router-redux';
+import { IUserList } from '@src/pages/user/typing';
 import { IActionType } from './action-type';
 
 // 登录页面的 reducer 数据的状态
@@ -34,11 +35,17 @@ export interface IProductState {
     }
 }
 
+// 用户管理 reducer数据
+export interface IUser {
+    userList:IUserList[]
+}
+
 export interface IRootReducerStateType {
     auth: ILoginState
     weather:IDefaultData
     classify:ICategoryState
     product:IProductState
+    user:IUser
 }
 
-export type ReducerType = Reducer<CombinedState<{auth: ILoginState, weather: IDefaultData, classify: ICategoryState, product: IProductState}>, IActionType>
+export type ReducerType = Reducer<CombinedState<{auth: ILoginState, weather: IDefaultData, classify: ICategoryState, product: IProductState, user: {}}>, IActionType>

@@ -76,6 +76,7 @@
     "react/jsx-closing-tag-location": 0,
     "react/jsx-indent-props": 1,
     "jsx-quotes": 1,
-    "react/jsx-tag-spacing": 1
+    "react/jsx-tag-spacing": 1,
+    "@typescript-eslint/no-non-null-assertion": 0
   }
 }

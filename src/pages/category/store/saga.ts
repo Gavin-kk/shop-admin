@@ -11,7 +11,7 @@ import {
 import { AxiosResponse } from 'axios';
 import { message } from 'antd';
 import { IActionType } from '@src/common/types/sotre-types/action-type';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { IResponse } from '@src/common/types/sotre-types/response';
 import { ICategory } from '../typing';
 import {

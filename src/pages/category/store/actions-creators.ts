@@ -1,6 +1,6 @@
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { actionType } from '@pages/category/store/constant';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { ICategory } from '../typing';
 
 export const getState = (state:IRootReducerStateType):IRootReducerStateType => state;

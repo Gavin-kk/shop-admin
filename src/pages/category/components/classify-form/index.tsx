@@ -6,7 +6,7 @@ import Modal from 'antd/lib/modal/Modal';
 import { FormInstance } from 'antd/lib/form/hooks/useForm';
 import { addClassifyAction, updateChangeClassifyAction } from '@pages/category/store/actions-creators';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { IRootReducerStateType } from '@src/common/types/sotre-types/root-reducer-state-type';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { DropDownMenuWrapper } from './style';
 
 const { Option } = Select;

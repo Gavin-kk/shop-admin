@@ -108,7 +108,7 @@ const User: FC = (): ReactElement => {
               okText="是"
               cancelText="否"
             >
-              <Button type="dashed" size="small">删除</Button>
+              <Button type="primary" size="small" danger>删除</Button>
             </Popconfirm>
           </>
         );
@@ -136,7 +136,7 @@ const User: FC = (): ReactElement => {
           <Search
             enterButton
             style={{ width: 400 }}
-            placeholder="请输入用户名"
+            placeholder="请输入用户名或手机或邮箱"
             onSearch={handleSearch}
           />
         </Space>

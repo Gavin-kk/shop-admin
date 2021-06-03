@@ -56,7 +56,8 @@ const Weather: FC = (): ReactElement => {
   const city:string | undefined = weatherInfo?.city;
   const dayTemperature:number | undefined = weatherInfo?.forecasts[0].dayTemp;
   const nightTemperature: number | undefined = weatherInfo?.forecasts[0].nightTemp;
-  const weather: string | undefined = weatherInfo?.forecasts[0].dayWeather;
+  const dayWeather: string | undefined = weatherInfo?.forecasts[0].dayWeather;
+  const nightWeather: string | undefined = weatherInfo?.forecasts[0].nightWeather;
 
   return (
     <Spin size="small" spinning={whetherLoading}>
@@ -81,7 +82,14 @@ const Weather: FC = (): ReactElement => {
           {dayTemperature || 0}
           ℃
         </span>
-        <span className="weather">{weather}</span>
+        <span className="weather">
+          <em> 白天天气：</em>
+          {dayWeather}
+        </span>
+        <span className="weather">
+          <em>夜间天气：</em>
+          {nightWeather}
+        </span>
       </WeatherWrapper>
     </Spin>
 

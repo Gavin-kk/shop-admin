@@ -13,6 +13,7 @@ import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.int
 import MyDate from '@components/date';
 // import Weather from '@components/weather';
 import adminPageMenuConfig, { MenuType } from '@src/config/admin-page-menu-config';
+import Weather from '@components/weather';
 import { HeaderWrapper } from './style';
 
 const AdminHeader: FC = (): ReactElement => {
@@ -76,7 +77,7 @@ const AdminHeader: FC = (): ReactElement => {
         <h3>{title}</h3>
         <div className="right">
           {/* 天气组件 */}
-          {/* <Weather /> */}
+          <Weather />
         </div>
       </div>
     </HeaderWrapper>

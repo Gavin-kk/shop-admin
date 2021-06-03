@@ -10,7 +10,6 @@ import { IFormValues, IGetUserInfoResponse, IUserList } from '@pages/user/typing
 import { changeUserInfoAction, changeUserListAction, getUserListAction } from '@pages/user/store/action-creators';
 import { message } from 'antd';
 import { IActionType } from '@src/common/types/sotre-types/action-type';
-import { callbackify } from 'util';
 import { ActionType } from './constant';
 
 function* getUserListSaga() {
@@ -71,7 +70,6 @@ function* searchForUsers(action:IActionType) {
     const result:AxiosResponse<IResponse<IUserList[]>> = yield searchForUsersRequest(content);
     yield put(changeUserListAction(result.data.data));
   } catch (error) {
-    console.log(error.response);
     message.error(error.response.data.msg || error.response.data.message);
   }
 }

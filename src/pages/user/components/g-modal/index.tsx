@@ -1,8 +1,8 @@
 import React, {
-  FC, ReactElement, memo, useState, useEffect,
+  FC, ReactElement, memo, useEffect,
 } from 'react';
 import {
-  Card, Form, Input, message, Modal,
+  Form, Input, Modal,
 } from 'antd';
 import { RuleObject } from 'rc-field-form/lib/interface';
 import { IFormValues } from '@pages/user/typing';
@@ -11,7 +11,6 @@ import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.int
 import {
   addUserAction,
   changeUserInfoAction,
-  getUserListAction,
   updateUserInfoAction,
 } from '../../store/action-creators';
 
@@ -73,7 +72,6 @@ const GModal: FC<IProps> = ({
     } else {
     //   发送更新请求
       values.id = userInfo?.userInfo.id;
-      console.log(values);
       //   userInfo.userInfo.id
       dispatch(updateUserInfoAction(values));
       changeIsModalVisible(false);

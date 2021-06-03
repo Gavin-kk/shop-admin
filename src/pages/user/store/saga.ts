@@ -1,5 +1,7 @@
 import {
-  addUserRequest, deleteUserRequest, getUserInfoRequest, getUserListRequest, updateUserInfoRequest,
+  addUserRequest, deleteUserRequest, getUserInfoRequest, getUserListRequest,
+  searchForUsersRequest,
+  updateUserInfoRequest,
 } from '@src/services/user-request';
 import { ForkEffect, put, takeEvery } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
@@ -59,6 +61,16 @@ function* deleteUser(action:IActionType) {
     yield put(getUserListAction);
     message.success('删除成功');
   } catch (error) {
+    message.error(error.response.data.msg || error.response.data.message);
+  }
+}
+
+function* searchForUsers(action:IActionType) {
+  const content:string = action.data;
+  try {
+    const result:AxiosResponse<IResponse<IUserList[]>> = yield searchForUsersRequest(content);
+    yield put(changeUserListAction(result.data.data));
+  } catch (error) {
     console.log(error.response);
     message.error(error.response.data.msg || error.response.data.message);
   }
@@ -70,6 +82,7 @@ function* saga(): Generator<ForkEffect<never>, void, unknown> {
   yield takeEvery(ActionType.GET_USER_INFO_USER, getUserinfo);
   yield takeEvery(ActionType.UPDATE_USER_INFO, updateUserInfo);
   yield takeEvery(ActionType.DELETE_USER, deleteUser);
+  yield takeEvery(ActionType.SEARCH_FOR_USERS, searchForUsers);
 }
 
 export default saga;

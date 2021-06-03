@@ -22,3 +22,9 @@ export const deleteUserRequest = (id:number):Promise<any> => request.delete('/au
     id,
   },
 });
+// 通过用户名或手机号或email 来搜索用户
+export const searchForUsersRequest = (content:string):Promise<any> => request.get('/auth/search', {
+  params: {
+    content,
+  },
+});

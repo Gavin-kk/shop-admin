@@ -5,6 +5,7 @@ export enum ActionType {
   GET_USER_INFO_USER='get_user_info_user',
   CHANGE_USER_INFO_USER='change_user_info_user',
   UPDATE_USER_INFO='update_user_info',
-  DELETE_USER='delete_user'
+  DELETE_USER='delete_user',
+  SEARCH_FOR_USERS='search_for_users'
 
 }

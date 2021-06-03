@@ -39,3 +39,8 @@ export const deleteUserAction = (id:number):IActionType => ({
   type: ActionType.DELETE_USER,
   data: id,
 });
+
+export const searchForUsersAction = (content:string): IActionType => ({
+  type: ActionType.SEARCH_FOR_USERS,
+  data: content,
+});

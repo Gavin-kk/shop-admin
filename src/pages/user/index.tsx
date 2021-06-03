@@ -7,7 +7,9 @@ import {
 import moment from 'moment';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
-import { deleteUserAction, getUserInfoAction, getUserListAction } from '@pages/user/store/action-creators';
+import {
+  deleteUserAction, getUserInfoAction, getUserListAction, searchForUsersAction,
+} from '@pages/user/store/action-creators';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { momentConfig } from '@src/config/moment-config';
 import GModal, { Method } from '@pages/user/components/g-modal';
@@ -33,7 +35,11 @@ const User: FC = (): ReactElement => {
   }, []);
 
   const handleSearch = useCallback((value: string) => {
-    console.log(value);
+    if (value) {
+      dispatch(searchForUsersAction(value));
+    } else {
+      dispatch(getUserListAction);
+    }
   }, [dispatch]);
 
   const columns = [

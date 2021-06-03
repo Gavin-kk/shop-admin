@@ -6,6 +6,7 @@ import { ActionType } from './constant';
 
 const initData:IUser = {
   userList: [],
+  userInfo: null,
 };
 
 function reducer(state = initData, action:IActionType):IUser {
@@ -13,6 +14,9 @@ function reducer(state = initData, action:IActionType):IUser {
     switch (action.type) {
       case ActionType.CHANGE_USER_LIST:
         draft.userList = action.data;
+        return draft;
+      case ActionType.CHANGE_USER_INFO_USER:
+        draft.userInfo = action.data;
         return draft;
       default:
         return draft;

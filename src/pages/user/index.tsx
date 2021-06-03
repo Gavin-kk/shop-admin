@@ -1,34 +1,30 @@
 import React, {
-  FC, ReactElement, memo, useCallback, useEffect, useState,
+  FC, memo, ReactElement, useCallback, useEffect, useState,
 } from 'react';
 import {
-  Button, Card, Form, Input, Modal, Space, Table,
+  Button, Card, Input, Popconfirm, Space, Table,
 } from 'antd';
 import moment from 'moment';
-import { useHistory } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
-import { getUserListAction } from '@pages/user/store/action-creators';
-import { IRootReducerStateType, IUser } from '@src/common/types/sotre-types/reducer.interface';
+import { deleteUserAction, getUserInfoAction, getUserListAction } from '@pages/user/store/action-creators';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { momentConfig } from '@src/config/moment-config';
-import GModal from '@pages/user/components/g-modal';
-import { UserPageWrapper } from './style';
+import GModal, { Method } from '@pages/user/components/g-modal';
 import { IUserList } from './typing';
 
 moment.locale('zh-cn', momentConfig);
-
-const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 19 },
-};
 
 const { Search } = Input;
 const User: FC = (): ReactElement => {
   const { userList } = useSelector((state:IRootReducerStateType) => ({
     userList: state.user.userList,
   }), shallowEqual);
-
+  // 添加组件是否显示
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  // 修改"组件是否显示
+  const [method, setMethod] = useState<Method>(Method.ADD);
+  // 使用弹框的方法
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,11 +37,7 @@ const User: FC = (): ReactElement => {
   }, [dispatch]);
 
   const columns = [
-    {
-      title: '用户名',
-      dataIndex: 'username',
-      key: 'username',
-    },
+    { title: '用户名', dataIndex: 'username', key: 'username' },
     {
       title: '手机',
       render(rowData: IUserList) {
@@ -93,21 +85,37 @@ const User: FC = (): ReactElement => {
     {
       title: '操作',
       render(rowData: IUserList) {
+        const edit = () => {
+          setMethod(Method.EDIT);
+          dispatch(getUserInfoAction(rowData.id));
+          setIsModalVisible(true);
+        };
+        const remove = () => {
+          dispatch(deleteUserAction(rowData.id));
+        };
         return (
           <>
-            <Button type="primary" size="small">修改</Button>
-            <Button type="dashed" size="small">删除</Button>
+            <Button type="primary" size="small" onClick={edit} style={{ marginRight: 8 }}>修改</Button>
+            <Popconfirm
+              title="你确定要删除吗"
+              onConfirm={remove}
+              okText="是"
+              cancelText="否"
+            >
+              <Button type="dashed" size="small">删除</Button>
+            </Popconfirm>
           </>
         );
       },
     },
   ];
 
-  // 控制添加用户的表单控件为显示
+  // 控制添加或修改用户的表单控件为显示
   const showAddedUsers = useCallback(() => {
+    setMethod(Method.ADD);
     setIsModalVisible(true);
   }, []);
-  // 控制添加用户的表单控件为隐藏
+  // 控制添加用户或修改的表单控件为隐藏
   const handleCancel = useCallback(() => {
     setIsModalVisible(false);
   }, []);
@@ -130,13 +138,13 @@ const User: FC = (): ReactElement => {
       extra={<Button type="primary" icon={<PlusOutlined />} onClick={showAddedUsers}>添加用户</Button>}
       style={{ width: '100%' }}
     >
-      {/* /!* <UserPageWrapper /> *!/columns={columns} */}
       <Table
         columns={columns}
         dataSource={userList}
         rowKey="id"
       />
       <GModal
+        method={method}
         isModalVisible={isModalVisible}
         handleCancel={handleCancel}
         changeIsModalVisible={changeIsModalVisible}

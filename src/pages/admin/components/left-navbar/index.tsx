@@ -11,8 +11,24 @@ const { SubMenu } = Menu;
 
 const LeftNavbar: FC = (): ReactElement => {
   const history = useHistory<History>();
-
+  const arr = ['权限列表',
+    '商品',
+    '/admin/home',
+    '/admin/user', '/admin/role',
+    '/admin/product',
+  ];
+  // const processingMenu = (menuList: MenuType[]) => menuList.map((item) => {
+  //   if (item.children && item.title !== '商品管理') {
+  //     return (
+  //       <SubMenu key={item.title} icon={item.icon} title={item.title}>
+  //         {/* 如果存在 children 那么就重新调用一下处理menu 把children传入 */}
+  //         { processingMenu(item.children)}
+  //       </SubMenu>
+  //     );
+  //   }
   const processingMenu = (menuList: MenuType[]) => menuList.map((item) => {
+    const auth = arr.find((itemx) => itemx === item.key);
+    // if (auth) { // 鉴定权限
     if (item.children && item.title !== '商品管理') {
       return (
         <SubMenu key={item.title} icon={item.icon} title={item.title}>
@@ -28,6 +44,8 @@ const LeftNavbar: FC = (): ReactElement => {
         </NavLink>
       </Menu.Item>
     );
+    // }
+    // return null;
   });
 
   // 判断初始展开哪个菜单
@@ -69,7 +87,7 @@ const LeftNavbar: FC = (): ReactElement => {
           <span>后台管理系统</span>
         </NavLink>
       </LeftNavBarWrapper>
-      {/*  菜单 */}
+      {/* 菜单 */}
       <Menu
         defaultSelectedKeys={[processTheSelectedMenuItem()]}
         defaultOpenKeys={[expandMenuByDefault()]}

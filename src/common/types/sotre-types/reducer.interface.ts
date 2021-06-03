@@ -45,6 +45,7 @@ export interface IUser {
 // 角色管理 reducer 数据
 export interface IRole {
     roleList:IRoleList[] | []
+    info:IRoleList | null
 }
 
 export interface IRootReducerStateType {

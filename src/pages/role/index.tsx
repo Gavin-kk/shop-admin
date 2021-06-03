@@ -1,22 +1,29 @@
 import React, {
-  FC, ReactElement, memo, useCallback, useEffect,
+  FC, Key, memo, ReactElement, useCallback, useEffect, useState,
 } from 'react';
 import {
-  Button, Card, Input, Popconfirm, Space, Table,
+  Button, Card, Input, Space, Table,
 } from 'antd';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { getRoleListAction } from '@pages/role/store/action-creators';
+import { changeCurrentInfo, getRoleListAction } from '@pages/role/store/action-creators';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { ColumnsType } from 'antd/lib/table/interface';
 import { IRoleList } from '@pages/role/typing';
+import GModal, { Method } from '@pages/role/components/modal';
 
 const { Search } = Input;
 
 const Role: FC = (): ReactElement => {
-  const { roleList } = useSelector((state:IRootReducerStateType) => ({
+  const { roleList, info } = useSelector((state:IRootReducerStateType) => ({
     roleList: state.role.roleList,
+    info: state.role.info,
   }), shallowEqual);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  // 控制时修改还是删除
+  const [method, setMethod] = useState<Method>(Method.ADD);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getRoleListAction);
   }, []);
@@ -44,18 +51,34 @@ const Role: FC = (): ReactElement => {
     },
     {
       title: '操作',
-      width: 300,
+      width: 200,
       render() {
-        return (
-          <>
-            <Button type="primary" size="small" style={{ marginRight: 8 }}>查看</Button>
-            <Button type="primary" size="small" danger>删除</Button>
-          </>
-        );
+        return <Button type="primary" size="small" danger>删除</Button>;
       },
     },
   ];
+  // 对话框关闭时执行
+  const onCancel = useCallback(() => {
+    setIsModalVisible(false);
+  }, []);
+  // 自组件控制对话框是否显示的回掉函数
+  const controlDisplay = useCallback((show:boolean) => {
+    setIsModalVisible(show);
+  }, []);
 
+  const showDialog = useCallback(() => {
+    setIsModalVisible(true);
+    // 修改组件状态为 add
+    setMethod(Method.ADD);
+  }, []);
+  // 设置角色权限
+  const setRolePermissions = () => {
+    // 修改组件状态为 edit
+    setMethod(() => Method.EDIT);
+
+    // 让对话框显示
+    setIsModalVisible(true);
+  };
   return (
     <Card
       title={(
@@ -70,17 +93,28 @@ const Role: FC = (): ReactElement => {
       )}
       extra={(
         <>
-          <Button style={{ marginRight: 8 }}>设置角色权限</Button>
-          <Button type="primary">添加角色</Button>
+          <Button style={{ marginRight: 8 }} disabled={!info} onClick={setRolePermissions}>设置角色权限</Button>
+          <Button type="primary" onClick={showDialog}>添加角色</Button>
         </>
       )}
     >
       <Table
+        rowSelection={{
+          type: 'radio',
+          onChange(currentSelected:Key[], rowData:IRoleList[]) {
+            dispatch(changeCurrentInfo(rowData[0]));
+          },
+        }}
         columns={columns}
         dataSource={roleList}
         rowKey="id"
       />
-
+      <GModal
+        method={method}
+        isModalVisible={isModalVisible}
+        onCancel={onCancel}
+        controlDisplay={controlDisplay}
+      />
     </Card>
   );
 };

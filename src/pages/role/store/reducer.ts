@@ -6,6 +6,7 @@ import { ActionType } from './constant';
 
 const initData:IRole = {
   roleList: [],
+  info: null,
 };
 
 function reducer(state = initData, action:IActionType):IRole {
@@ -13,6 +14,9 @@ function reducer(state = initData, action:IActionType):IRole {
     switch (action.type) {
       case ActionType.CHANGE_ROLE_LIST:
         draft.roleList = action.data;
+        return draft;
+      case ActionType.CHANGE_INFO:
+        draft.info = action.data;
         return draft;
       default:
         return draft;

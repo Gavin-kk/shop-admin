@@ -2,10 +2,12 @@ import React, {
   FC, Key, memo, ReactElement, useCallback, useEffect, useState,
 } from 'react';
 import {
-  Button, Card, Input, Space, Table,
+  Button, Card, Input, Popconfirm, Space, Table,
 } from 'antd';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { changeCurrentInfo, getRoleListAction } from '@pages/role/store/action-creators';
+import {
+  changeCurrentInfoAction, deleteRoleAction, getRoleListAction, searchRoleAction,
+} from '@pages/role/store/action-creators';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { ColumnsType } from 'antd/lib/table/interface';
 import { IRoleList } from '@pages/role/typing';
@@ -30,7 +32,11 @@ const Role: FC = (): ReactElement => {
 
   // 搜索
   const handleSearch = useCallback((value: string) => {
-    console.log(value);
+    if (value) {
+      dispatch(searchRoleAction(value));
+    } else {
+      dispatch(getRoleListAction);
+    }
   }, []);
   const columns: ColumnsType<IRoleList> = [
     {
@@ -52,8 +58,20 @@ const Role: FC = (): ReactElement => {
     {
       title: '操作',
       width: 200,
-      render() {
-        return <Button type="primary" size="small" danger>删除</Button>;
+      render(rowDate:IRoleList) {
+        const confirm = () => {
+          dispatch(deleteRoleAction(rowDate.id));
+        };
+        return (
+          <Popconfirm
+            title="删除后无法恢复,你确定吗?"
+            onConfirm={confirm}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="primary" size="small" danger>删除</Button>
+          </Popconfirm>
+        );
       },
     },
   ];
@@ -86,7 +104,7 @@ const Role: FC = (): ReactElement => {
           <Search
             enterButton
             style={{ width: 400 }}
-            placeholder="请输入角色名称"
+            placeholder="请输入角色名称或授权人"
             onSearch={handleSearch}
           />
         </Space>
@@ -102,7 +120,7 @@ const Role: FC = (): ReactElement => {
         rowSelection={{
           type: 'radio',
           onChange(currentSelected:Key[], rowData:IRoleList[]) {
-            dispatch(changeCurrentInfo(rowData[0]));
+            dispatch(changeCurrentInfoAction(rowData[0]));
           },
         }}
         columns={columns}

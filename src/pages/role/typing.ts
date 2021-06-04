@@ -7,3 +7,10 @@ export interface IRoleList {
   updateAt: string;
   menu: string[];
 }
+
+export type RoleType = {
+  id?:number
+  roleName:string
+  menu:string[]
+  authTime?:string
+}

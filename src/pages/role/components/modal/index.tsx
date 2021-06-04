@@ -9,19 +9,14 @@ import adminPageMenuConfig from '@src/config/admin-page-menu-config';
 import { ValidateStatus } from 'antd/lib/form/FormItem';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
-import { addRoleAction } from '../../store/action-creators';
+import { addRoleAction, updateRoleAction } from '../../store/action-creators';
+import { RoleType } from '../../typing';
 
 interface IProps {
   isModalVisible: boolean
   onCancel: () => void
   controlDisplay:(show:boolean)=>void
   method:Method
-}
-
-export type AddRoleType = {
-  roleName:string
-  menus:string[]
-  authTime?:string
 }
 
 export enum Method {
@@ -47,14 +42,11 @@ const GModal: FC<IProps> = ({
   const [roleNameInputValue, setRoleNameInputValue] = useState<string>('');
   // 当前树形控件选择的值
   const [currentSelected, setCurrentSelected] = useState<string[]>([]);
-  // 默认选中的key
-  const [defaultCheckedKeys, setDefaultCheckedKeys] = useState<string[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (method === Method.EDIT && info) {
       setRoleNameInputValue(info.roleName);
-      console.log(info.menu);
       setCurrentSelected(info.menu);
     } else if (method === Method.ADD) {
       setCurrentSelected([]);
@@ -62,6 +54,7 @@ const GModal: FC<IProps> = ({
       // setDefaultCheckedKeys([]);
     }
   }, [method, info]);
+
   // input输入改变时触发的函数
   const inputChange = (event:ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -74,16 +67,21 @@ const GModal: FC<IProps> = ({
 
   // 对话框点击ok执行的函数
   const handleOk = () => {
-    const addRoleInfo:AddRoleType = {
+    const RoleInfo:RoleType = {
       roleName: (roleNameInputValue as string),
-      menus: currentSelected,
+      menu: currentSelected,
     };
 
     if (!roleNameInputValue) {
       setVerificationStatus('error');
       setHelp('角色名称不可为空');
     } else {
-      dispatch(addRoleAction(addRoleInfo));
+      if (method === Method.EDIT) {
+        RoleInfo.id = info?.id;
+        dispatch(updateRoleAction(RoleInfo));
+      } else {
+        dispatch(addRoleAction(RoleInfo));
+      }
       controlDisplay(false);
     }
   };

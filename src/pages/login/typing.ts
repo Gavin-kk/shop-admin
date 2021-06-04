@@ -5,6 +5,17 @@ export type IFormType ={
     remember:boolean
 };
 
+/* Role */
+export interface Role {
+    id: number;
+    roleName: string;
+    authTime: string;
+    authName: string;
+    createAt: string;
+    updateAt: string;
+    menu: string[];
+    parentMenu: string[]
+}
 // api接口响应数据的类型
 /* User */
 export interface User {
@@ -12,6 +23,8 @@ export interface User {
     username: string;
     phone: string | null;
     email: string | null;
+    roleId:number | null;
+    role:Role;
     createAt: string;
     updateAt: string;
 }
@@ -20,17 +33,4 @@ export interface User {
 export interface Data {
     user: User;
     token: string;
-}
-
-export interface IResponse {
-    code: number;
-    message: string;
-}
-/* LoginResponse */
-export interface ILoginResponse extends IResponse{
-    data: Data;
-}
-
-export interface UserResponse extends IResponse{
-    data:User;
 }

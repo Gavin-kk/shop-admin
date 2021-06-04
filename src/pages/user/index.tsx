@@ -3,7 +3,7 @@ import React, {
   Key,
 } from 'react';
 import {
-  Button, Card, Input, Modal, Popconfirm, Select, Space, Table,
+  Button, Card, Input, Modal, Popconfirm, Space, Table,
 } from 'antd';
 import moment from 'moment';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';

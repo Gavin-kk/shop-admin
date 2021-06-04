@@ -1,4 +1,4 @@
-import { AnyAction, CombinedState, Reducer } from 'redux';
+import { CombinedState, Reducer } from 'redux';
 
 import { User } from '@pages/login/typing';
 import { IDefaultData } from '@src/components/weather/store/reducer';
@@ -6,7 +6,7 @@ import { ICategory } from '@src/pages/category/typing';
 import {
   IDetails, IProduct, ISearch, IUploadDate,
 } from '@src/pages/product/typing';
-import { RouterState } from 'react-router-redux';
+// import { RouterState } from 'react-router-redux';
 import { IGetUserInfoResponse, IUserList } from '@src/pages/user/typing';
 import { IRoleList } from '@src/pages/role/typing';
 import { IActionType } from './action-type';

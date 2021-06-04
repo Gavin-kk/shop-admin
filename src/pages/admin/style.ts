@@ -30,11 +30,8 @@ export const AdminWrapper = styled.div`
   }
 
   .content {
-    margin: 25px;
-    margin-bottom: 0;
-    //height: 100%;
+    margin: 25px 25px 0 260px;
     min-height: 400px;
     background: white;
-    margin-left: 260px;
   }
 `;

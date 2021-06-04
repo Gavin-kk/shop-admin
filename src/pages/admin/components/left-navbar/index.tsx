@@ -5,18 +5,19 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { Menu } from 'antd';
 
 import adminPageMenuConfig, { MenuType } from '@src/config/admin-page-menu-config';
+import { shallowEqual, useSelector } from 'react-redux';
+import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
+import { HomeOutlined } from '@ant-design/icons';
 import { LeftNavBarWrapper } from './style';
 
 const { SubMenu } = Menu;
 
 const LeftNavbar: FC = (): ReactElement => {
+  const { userInfo } = useSelector((state:IRootReducerStateType) => ({
+    userInfo: state.auth.userInfo,
+  }), shallowEqual);
   const history = useHistory<History>();
-  const arr = ['权限列表',
-    '商品',
-    '/admin/home',
-    '/admin/user', '/admin/role',
-    '/admin/product',
-  ];
+
   // const processingMenu = (menuList: MenuType[]) => menuList.map((item) => {
   //   if (item.children && item.title !== '商品管理') {
   //     return (
@@ -27,25 +28,25 @@ const LeftNavbar: FC = (): ReactElement => {
   //     );
   //   }
   const processingMenu = (menuList: MenuType[]) => menuList.map((item) => {
-    const auth = arr.find((itemx) => itemx === item.key);
-    // if (auth) { // 鉴定权限
-    if (item.children && item.title !== '商品管理') {
+    const auth = userInfo!.role.menu.find((itemx) => itemx === item.key);
+    if (auth) { // 鉴定权限
+      if (item.children && item.title !== '商品管理') {
+        return (
+          <SubMenu key={item.title} icon={item.icon} title={item.title}>
+            {/* 如果存在 children 那么就重新调用一下处理menu 把children传入 */}
+            { processingMenu(item.children)}
+          </SubMenu>
+        );
+      }
       return (
-        <SubMenu key={item.title} icon={item.icon} title={item.title}>
-          {/* 如果存在 children 那么就重新调用一下处理menu 把children传入 */}
-          { processingMenu(item.children)}
-        </SubMenu>
+        <Menu.Item key={item.routerPath} icon={item.icon}>
+          <NavLink to={(item.routerPath as string)}>
+            {item.title}
+          </NavLink>
+        </Menu.Item>
       );
     }
-    return (
-      <Menu.Item key={item.routerPath} icon={item.icon}>
-        <NavLink to={(item.routerPath as string)}>
-          {item.title}
-        </NavLink>
-      </Menu.Item>
-    );
-    // }
-    // return null;
+    return null;
   });
 
   // 判断初始展开哪个菜单
@@ -70,6 +71,9 @@ const LeftNavbar: FC = (): ReactElement => {
   // 判断默认选中哪个菜单项
   const processTheSelectedMenuItem = (): string => {
     const path = history.location.pathname;
+    if (path === '/admin/home') {
+      return path;
+    }
     if (path === '/admin') {
       return `${path}/home`;
     }
@@ -89,12 +93,20 @@ const LeftNavbar: FC = (): ReactElement => {
       </LeftNavBarWrapper>
       {/* 菜单 */}
       <Menu
-        defaultSelectedKeys={[processTheSelectedMenuItem()]}
+        selectedKeys={[processTheSelectedMenuItem()]}
+        // defaultSelectedKeys={[]}
         defaultOpenKeys={[expandMenuByDefault()]}
         mode="inline"
         theme="dark"
       >
-        { processingMenu(adminPageMenuConfig) }
+        { userInfo && userInfo.role ? processingMenu(adminPageMenuConfig)
+          : (
+            <Menu.Item key="/admin/home" icon={<HomeOutlined />}>
+              <NavLink to="/admin/home">
+                首页
+              </NavLink>
+            </Menu.Item>
+          )}
       </Menu>
     </>
 

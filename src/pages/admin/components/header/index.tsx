@@ -70,7 +70,7 @@ const AdminHeader: FC = (): ReactElement => {
           <span>{ userInfo?.username }</span>
         </span>
         <Popconfirm placement="bottom" title="确认退出吗?" onConfirm={signOut} okText="是" cancelText="否">
-          <a href="javascript;">退出登录</a>
+          <a style={{ color: 'rgb(80,168,192)' }}>退出登录</a>
         </Popconfirm>
       </div>
       <div className="bottom">

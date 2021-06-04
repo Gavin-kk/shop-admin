@@ -6,6 +6,7 @@ export interface IRoleList {
   createAt: string;
   updateAt: string;
   menu: string[];
+  parentMenu: string[]
 }
 
 export type RoleType = {
@@ -13,4 +14,5 @@ export type RoleType = {
   roleName:string
   menu:string[]
   authTime?:string
+  parentMenu:string[]
 }

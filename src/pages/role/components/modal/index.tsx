@@ -42,16 +42,26 @@ const GModal: FC<IProps> = ({
   const [roleNameInputValue, setRoleNameInputValue] = useState<string>('');
   // 当前树形控件选择的值
   const [currentSelected, setCurrentSelected] = useState<string[]>([]);
+  const [halfCheckedKeys, setHalfCheckedKeys] = useState<string[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (method === Method.EDIT && info) {
+      /*  在菜单列表回显时
+            因为menu中存储的是所有选中的菜单和父节点菜单
+            所以在给tree控件做回显的时候 会出现一个情况
+            就是只要父节点出现了 那么就会把所有子节点全部选中
+          解决方案: 通过 tree控件的 onCheck:(value,event)=>void 的第二个参数中的 halfCheckedKeys 得到所有半选中的菜单
+                  然后在数据库中设置一个 parentMenu 字段 存储所有父节点的 key 在我们添加时 就把所有父节点提交上去存储
+                  当我们做回显时 通过这个 parentMenu 过滤掉menu中父节点的值 就大功告成了
+      */
+      // 去除父节点的当前选择
+      const Selected = info.menu.filter((item) => info.parentMenu.findIndex((itemx) => itemx === item) === -1);
       setRoleNameInputValue(info.roleName);
-      setCurrentSelected(info.menu);
+      setCurrentSelected(Selected);
     } else if (method === Method.ADD) {
       setCurrentSelected([]);
       setRoleNameInputValue('');
-      // setDefaultCheckedKeys([]);
     }
   }, [method, info]);
 
@@ -67,9 +77,15 @@ const GModal: FC<IProps> = ({
 
   // 对话框点击ok执行的函数
   const handleOk = () => {
+    const menu = [...currentSelected];
+    halfCheckedKeys.forEach((item) => {
+      menu.push(item);
+    });
+
     const RoleInfo:RoleType = {
       roleName: (roleNameInputValue as string),
-      menu: currentSelected,
+      parentMenu: halfCheckedKeys,
+      menu,
     };
 
     if (!roleNameInputValue) {
@@ -91,8 +107,9 @@ const GModal: FC<IProps> = ({
   }; */
 
   // 每次选择树形结构框 执行的函数
-  const onCheck = (checkedKeys: string[]) => {
+  const onCheck = (checkedKeys: string[], e:any) => {
     setCurrentSelected(checkedKeys);
+    setHalfCheckedKeys(e.halfCheckedKeys);
   };
 
   const handleMentConfig = [{ title: '权限列表', key: '权限列表', children: adminPageMenuConfig }];
@@ -123,11 +140,7 @@ const GModal: FC<IProps> = ({
         <Tree
           defaultExpandAll
           checkable
-          // selectedKeys={currentSelected}
           checkedKeys={currentSelected}
-          // defaultExpandedKeys={['0-0-0', '0-0-1']}
-          // defaultSelectedKeys={defaultCheckedKeys}
-          // defaultCheckedKeys={}
           onCheck={(onCheck as (checked:any, info: any) => void)}
           treeData={handleMentConfig}
         />

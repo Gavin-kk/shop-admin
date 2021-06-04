@@ -1,13 +1,10 @@
 import React, {
-  FC, ReactElement, memo, useEffect, Suspense,
+  FC, ReactElement, memo, useEffect, Suspense, useLayoutEffect,
 } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Layout } from 'antd';
-
+import { Layout, message } from 'antd';
 import { PageProps } from '@src/common/types/router-component-props-type';
-
 import { getUserInfoAction } from '@pages/login/store/actions-creators';
-
 import AdminHeader from '@pages/admin/components/header';
 import LeftNavbar from '@pages/admin/components/left-navbar';
 import { renderRoutes, RouteConfig } from 'react-router-config';
@@ -15,7 +12,7 @@ import Loading from '@components/loading';
 import { Footer } from 'antd/lib/layout/layout';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import { USER_KEY } from '@src/common/constant/auth-constant';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { AdminWrapper } from './style';
 import AdminFooter from './components/footer';
 
@@ -24,12 +21,14 @@ const {
 } = Layout;
 
 const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
-  const { whetherToLogIn } = useSelector((state:IRootReducerStateType) => ({
+  const { whetherToLogIn, userInfo } = useSelector((state:IRootReducerStateType) => ({
     whetherToLogIn: state.auth.whetherToLogIn,
+    userInfo: state.auth.userInfo,
   }), shallowEqual);
 
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     const token = window.localStorage.getItem(USER_KEY);
@@ -39,6 +38,21 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
       dispatch(getUserInfoAction);
     }
   }, [dispatch, whetherToLogIn, location]);
+
+  useEffect(() => {
+    if (userInfo && userInfo.role && userInfo.role.menu) {
+      const { menu } = userInfo.role;
+      /* .filter((item) => userInfo.role.parentMenu.findIndex((itemx) => itemx === item) === -1);
+      menu.push('/admin/product'); */
+      // console.log(menu);
+      const a = menu.find((item) => item.indexOf(location.pathname) !== -1);
+      // && location.pathname !== '/admin/product'
+      if (!a) {
+        history.replace('/admin/home');
+        message.error('权限不足');
+      }
+    }
+  }, [location, userInfo]);
 
   const childRouters:RouteConfig[] | undefined = props.route?.routes;
 

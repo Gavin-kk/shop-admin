@@ -7,10 +7,11 @@ import { IActionType } from '@src/common/types/sotre-types/action-type';
 import { getUserInfoRequest, loginRequest } from '@src/services/login-request';
 import { USER_KEY } from '@src/common/constant/auth-constant';
 import LocalStorage from '@utils/local-storage-utils';
-import { ILoginResponse, UserResponse } from '@pages/login/typing';
+import { User, Data } from '@pages/login/typing';
 
 // 网络请求 action等等
 import { message } from 'antd';
+import { IResponse } from '@src/common/types/sotre-types/response';
 import { SEND_LOGIN_REQUEST, GET_USER_INFO } from './constant';
 
 import { changeLoginErrorMessageAction, changeLoginStateAction, changeUserInfoAction } from './actions-creators';
@@ -18,7 +19,7 @@ import { changeLoginErrorMessageAction, changeLoginStateAction, changeUserInfoAc
 // 自己的组件
 function* sendLoginRequest(action: IActionType) {
   try {
-    const result: AxiosResponse<ILoginResponse> = yield loginRequest(action.data);
+    const result: AxiosResponse<IResponse<Data>> = yield loginRequest(action.data);
     // 正确的取到的数据
     yield put(changeUserInfoAction(result.data.data.user));
     yield put(changeLoginErrorMessageAction(null));
@@ -26,7 +27,8 @@ function* sendLoginRequest(action: IActionType) {
     LocalStorage.permanentlyStoreData(USER_KEY, result.data.data.token);
     yield message.success('登录成功');
     // 错误
-  } catch (error:any) {
+  } catch (error) {
+    console.log(error);
     yield put(changeLoginStateAction(false));
     yield put(changeLoginErrorMessageAction((error.response.data.msg as string)));
   }
@@ -34,7 +36,7 @@ function* sendLoginRequest(action: IActionType) {
 
 function* getUserInfo() {
   try {
-    const result:AxiosResponse<UserResponse> = yield getUserInfoRequest();
+    const result:AxiosResponse<IResponse<User>> = yield getUserInfoRequest();
     yield put(changeUserInfoAction(result.data.data));
     yield put(changeLoginStateAction(true));
   } catch (error:any) {

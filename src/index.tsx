@@ -11,6 +11,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
-
-// <React.StrictMode>
-// </React.StrictMode>,

@@ -1,7 +1,7 @@
 import React, {
   memo, FC, Fragment, useEffect,
 } from 'react';
-import { Modal, Select } from 'antd';
+import { Select } from 'antd';
 import { useDispatch } from 'react-redux';
 import { IActionType } from '@src/common/types/sotre-types/action-type';
 

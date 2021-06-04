@@ -6,6 +6,8 @@ export enum ActionType {
   CHANGE_USER_INFO_USER='change_user_info_user',
   UPDATE_USER_INFO='update_user_info',
   DELETE_USER='delete_user',
-  SEARCH_FOR_USERS='search_for_users'
-
+  SEARCH_FOR_USERS='search_for_users',
+  CHANGE_SELECTED_USER_ID='change_selected_user_id',
+  CHANGE_CURRENT_SELECT_ROLE_ID='change_current_select_role_id',
+  SEND_ASSIGN_ROLE_REQUEST='send-assign-role-request'
 }

@@ -33,7 +33,7 @@ export const AdminWrapper = styled.div`
     margin: 25px;
     margin-bottom: 0;
     //height: 100%;
-    min-height: 700px;
+    min-height: 400px;
     background: white;
     margin-left: 260px;
   }

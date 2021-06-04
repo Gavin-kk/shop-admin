@@ -7,6 +7,8 @@ import { ActionType } from './constant';
 const initData:IUser = {
   userList: [],
   userInfo: null,
+  selectedUserId: null,
+  selectedRoleId: null,
 };
 
 function reducer(state = initData, action:IActionType):IUser {
@@ -17,6 +19,12 @@ function reducer(state = initData, action:IActionType):IUser {
         return draft;
       case ActionType.CHANGE_USER_INFO_USER:
         draft.userInfo = action.data;
+        return draft;
+      case ActionType.CHANGE_SELECTED_USER_ID:
+        draft.selectedUserId = action.data;
+        return draft;
+      case ActionType.CHANGE_CURRENT_SELECT_ROLE_ID:
+        draft.selectedRoleId = action.data;
         return draft;
       default:
         return draft;

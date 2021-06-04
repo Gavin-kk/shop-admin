@@ -5,5 +5,5 @@ export enum ActionType {
   CHANGE_INFO='change_info',
   UPDATE_ROLE='update_role',
   DELETE_ROLE='delete_role',
-  SEARCH_ROLE='search_role'
+  SEARCH_ROLE='search_role',
 }

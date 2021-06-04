@@ -28,3 +28,8 @@ export const searchForUsersRequest = (content:string):Promise<any> => request.ge
     content,
   },
 });
+// 给用户分配角色
+export const assigningRolesRequest = (id:number, roleId:number):Promise<any> => request.post('/auth/role', {
+  id,
+  roleId,
+});

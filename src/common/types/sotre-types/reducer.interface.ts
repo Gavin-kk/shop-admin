@@ -40,6 +40,8 @@ export interface IProductState {
 export interface IUser {
     userList:IUserList[]
     userInfo: IGetUserInfoResponse | null
+    selectedUserId:number | null
+    selectedRoleId:number | null
 }
 
 // 角色管理 reducer 数据

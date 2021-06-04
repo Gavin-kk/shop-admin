@@ -1,5 +1,5 @@
 import {
-  addUserRequest, deleteUserRequest, getUserInfoRequest, getUserListRequest,
+  addUserRequest, assigningRolesRequest, deleteUserRequest, getUserInfoRequest, getUserListRequest,
   searchForUsersRequest,
   updateUserInfoRequest,
 } from '@src/services/user-request';
@@ -74,6 +74,18 @@ function* searchForUsers(action:IActionType) {
   }
 }
 
+function* sendARoleAssignment(action:IActionType) {
+  const { id } = action.data;
+  const { roleId } = action.data;
+  try {
+    yield assigningRolesRequest(id, roleId);
+    yield put(getUserListAction);
+    yield message.success('分配成功');
+  } catch (e) {
+    yield message.error('分配失败');
+  }
+}
+
 function* saga(): Generator<ForkEffect<never>, void, unknown> {
   yield takeEvery(ActionType.GET_USER_LIST, getUserListSaga);
   yield takeEvery(ActionType.ADD_USER, addUser);
@@ -81,6 +93,7 @@ function* saga(): Generator<ForkEffect<never>, void, unknown> {
   yield takeEvery(ActionType.UPDATE_USER_INFO, updateUserInfo);
   yield takeEvery(ActionType.DELETE_USER, deleteUser);
   yield takeEvery(ActionType.SEARCH_FOR_USERS, searchForUsers);
+  yield takeEvery(ActionType.SEND_ASSIGN_ROLE_REQUEST, sendARoleAssignment);
 }
 
 export default saga;

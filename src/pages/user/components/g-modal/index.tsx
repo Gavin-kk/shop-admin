@@ -59,7 +59,6 @@ const GModal: FC<IProps> = ({
         password: '',
         phone: userInfo?.userInfo.phone,
         email: userInfo?.userInfo.email,
-        role_id: userInfo?.role.roleName,
       });
     }
   }, [userInfo]);
@@ -139,13 +138,13 @@ const GModal: FC<IProps> = ({
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          label="角色名称"
-          name="role_id"
-          rules={[{ required: false, message: 'Please input your username!' }]}
-        >
-          <Input placeholder="这个先放一放" />
-        </Form.Item>
+        {/* <Form.Item */}
+        {/*  label="角色名称" */}
+        {/*  name="role_id" */}
+        {/*  rules={[{ required: false, message: 'Please input your username!' }]} */}
+        {/* > */}
+        {/*  <Input placeholder="这个先放一放" /> */}
+        {/* </Form.Item> */}
       </Form>
     </Modal>
   );

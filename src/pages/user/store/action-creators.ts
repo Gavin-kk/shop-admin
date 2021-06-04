@@ -44,3 +44,21 @@ export const searchForUsersAction = (content:string): IActionType => ({
   type: ActionType.SEARCH_FOR_USERS,
   data: content,
 });
+// 更改当前选中的 id
+export const changeCurrentSelectedUserId = (id:number | null): IActionType => ({
+  type: ActionType.CHANGE_SELECTED_USER_ID,
+  data: id,
+});
+// 更改当前分配角色下拉框选中的 id
+export const changCurrentRoleSelectedId = (id:number | null): IActionType => ({
+  type: ActionType.CHANGE_CURRENT_SELECT_ROLE_ID,
+  data: id,
+});
+// 更改当前分配角色下拉框选中的 id
+export const sendRequestForRoleAssignmentAction = (id:number, roleId:number): IActionType => ({
+  type: ActionType.SEND_ASSIGN_ROLE_REQUEST,
+  data: {
+    id,
+    roleId,
+  },
+});

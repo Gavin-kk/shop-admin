@@ -28,7 +28,6 @@ function* sendLoginRequest(action: IActionType) {
     yield message.success('登录成功');
     // 错误
   } catch (error) {
-    console.log(error);
     yield put(changeLoginStateAction(false));
     yield put(changeLoginErrorMessageAction((error.response.data.msg as string)));
   }

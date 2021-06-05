@@ -52,18 +52,25 @@ const LeftNavbar: FC = (): ReactElement => {
   // 判断初始展开哪个菜单
   const expandMenuByDefault = (): string => {
     let title = '';
-    adminPageMenuConfig.forEach((item) => {
-      if (item.children && item.title !== '商品管理') {
-        item.children.forEach((itex) => {
-          if (itex.routerPath === history.location.pathname) {
-            title = item.title;
-          }
-        });
-      }
-    });
-    // 处理商品管理中的 add edit 等等路由 让他们一律默认展开商品
-    if (history.location.pathname.indexOf('/admin/product') !== -1) {
-      title = '商品';
+    try {
+      const fn = (list:MenuType[]) => list.forEach((item):void | boolean => {
+        if (item.children) {
+          item.children.forEach((itex) => {
+            if (itex.routerPath === history.location.pathname) {
+              throw new Error(item.title);
+            }
+          });
+          return fn(item.children);
+        }
+        // 处理商品管理中的 add edit 等等路由 让他们一律默认展开商品
+        if (history.location.pathname.indexOf('/admin/product') !== -1) {
+          throw new Error('商品');
+        }
+        return true;
+      });
+      fn(adminPageMenuConfig);
+    } catch (err) {
+      title = err.message;
     }
     return title;
   };

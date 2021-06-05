@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactElement, memo, useEffect, Suspense, useLayoutEffect,
+  FC, ReactElement, memo, useEffect, Suspense,
 } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Layout, message } from 'antd';
@@ -42,13 +42,10 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
   useEffect(() => {
     if (userInfo && userInfo.role && userInfo.role.menu) {
       const { menu } = userInfo.role;
-      /* .filter((item) => userInfo.role.parentMenu.findIndex((itemx) => itemx === item) === -1);
-      menu.push('/admin/product'); */
-      // console.log(menu);
       const a = menu.find((item) => item.indexOf(location.pathname) !== -1);
-      // && location.pathname !== '/admin/product'
       if (!a) {
-        history.replace('/admin/home');
+        // history.replace('/admin/home');
+        history.goBack();
         message.error('权限不足');
       }
     }

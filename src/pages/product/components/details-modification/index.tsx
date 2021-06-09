@@ -40,6 +40,7 @@ export interface SubmitType {
   classifyId?: number | null;
   price: number;
   detail: string | null;
+  avatar?: string;
   id?:number
 }
 

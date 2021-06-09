@@ -13,8 +13,7 @@ export const HeaderWrapper = styled.div`
     color: #000;
     border-bottom: 2px solid rgb(80,168,192);
     
-   
-
+    
     .date {
       height: 50px;
       margin-right: 20px;
@@ -23,6 +22,10 @@ export const HeaderWrapper = styled.div`
     
     > span > span {
       margin:0 5px
+    }
+    
+    .header-avatar {
+  
     }
     
     > a {
@@ -83,5 +86,22 @@ export const HeaderWrapper = styled.div`
         
       }
     }
+  }
+`;
+
+export const HeaderAvatar = styled.div`
+  display: flex;
+  width: 130px;
+  height: 100%;
+  line-height: 55px;
+  justify-content: center;
+  align-items: center;
+    
+  >img {
+    display: flex;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 0 8px;
   }
 `;

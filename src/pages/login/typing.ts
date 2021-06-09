@@ -24,6 +24,7 @@ export interface User {
     phone: string | null;
     email: string | null;
     roleId:number | null;
+    avatar:string | null;
     role:Role;
     createAt: string;
     updateAt: string;

@@ -21,7 +21,7 @@ export type MenuType = {
 
 const adminPageMenuConfig:MenuType[] = [
   {
-    title: '首页',
+    title: '个人中心',
     icon: <HomeOutlined />,
     routerPath: '/admin/home',
     key: '/admin/home',
@@ -89,13 +89,13 @@ const adminPageMenuConfig:MenuType[] = [
     key: '图形图表',
     children: [
       {
-        title: '柱形图',
+        title: '柱状图',
         icon: <BarChartOutlined />,
         routerPath: '/admin/bar',
         key: '/admin/bar',
       },
       {
-        title: '折线图',
+        title: '堆叠区域图',
         icon: <RiseOutlined />,
         routerPath: '/admin/line',
         key: '/admin/line',

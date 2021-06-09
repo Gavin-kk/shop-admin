@@ -3,6 +3,7 @@ export interface IUserList {
   username: string;
   phone: string | null;
   email: string | null;
+  avatar?: string;
   createAt: number;
   updateAt: number;
   role_id: number | null;
@@ -16,6 +17,7 @@ export interface IFormValues {
   password: string;
   phone: string;
   email: string;
+  avatar?: string;
   roleId?: number
 }
 
@@ -26,6 +28,7 @@ export interface IUserInfo {
   password: string;
   phone: string | null;
   email: string | null;
+  avatar?: string;
   createAt: number;
   updateAt: number;
   roleId: number;

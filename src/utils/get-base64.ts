@@ -6,3 +6,10 @@ export function getBase64(file:File): Promise<unknown> {
     reader.onerror = (error) => reject(error);
   });
 }
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export function getBase642(img:any, callback:(imageUrl:any)=>any) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}

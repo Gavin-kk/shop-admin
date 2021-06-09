@@ -105,7 +105,9 @@ function* updateProduct(action:IActionType) {
   const summit:SubmitType = action.data;
   try {
     yield updateProductRequest(summit);
-    window.history.back();
+    if (!summit.avatar) {
+      window.history.back();
+    }
     message.success('更新成功');
   } catch (error) {
     message.error(error.response.data.message || error.response.data.msg);

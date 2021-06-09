@@ -14,7 +14,7 @@ import MyDate from '@components/date';
 // import Weather from '@components/weather';
 import adminPageMenuConfig, { MenuType } from '@src/config/admin-page-menu-config';
 import Weather from '@components/weather';
-import { HeaderWrapper } from './style';
+import { HeaderAvatar, HeaderWrapper } from './style';
 
 const AdminHeader: FC = (): ReactElement => {
   const [title, setTitle] = useState<string>('首页');
@@ -58,10 +58,12 @@ const AdminHeader: FC = (): ReactElement => {
           {/* 日期组件 */}
           <MyDate />
         </div>
-        <span>
-          欢迎
+
+        <HeaderAvatar>
+          <span>欢迎 :</span>
+          { userInfo?.avatar && <img src={userInfo.avatar} alt="" /> }
           <span>{ userInfo?.username }</span>
-        </span>
+        </HeaderAvatar>
         <Popconfirm placement="bottom" title="确认退出吗?" onConfirm={signOut} okText="是" cancelText="否">
           <a style={{ color: 'rgb(80,168,192)' }}>退出登录</a>
         </Popconfirm>

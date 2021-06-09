@@ -66,6 +66,12 @@ const adminPageMenuConfig:MenuType[] = [
     ],
   },
   {
+    title: '订单管理',
+    icon: <UserOutlined />,
+    routerPath: '/admin/order',
+    key: '/admin/order',
+  },
+  {
     title: '用户管理',
     icon: <UserOutlined />,
     routerPath: '/admin/user',

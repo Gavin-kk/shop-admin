@@ -7,6 +7,7 @@ import { reducer as classifyReducer } from '@src/pages/category/store';
 import { reducer as productReducer } from '@pages/product/store';
 import { reducer as userReducer } from '@pages/user/store';
 import { reducer as roleReducer } from '@pages/role/store';
+import { reducer as orderReducer } from '@pages/order/store';
 
 const RootReducer = combineReducers({
   auth: loginReducer,
@@ -15,5 +16,6 @@ const RootReducer = combineReducers({
   product: productReducer,
   user: userReducer,
   role: roleReducer,
+  order: orderReducer,
 });
 export default RootReducer;

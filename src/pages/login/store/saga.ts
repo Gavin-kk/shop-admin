@@ -37,6 +37,10 @@ function* getUserInfo() {
   try {
     const result:AxiosResponse<IResponse<User>> = yield getUserInfoRequest();
     yield put(changeUserInfoAction(result.data.data));
+
+    if (!result.data.data.role) {
+      message.error('请联系管理员添加权限');
+    }
     yield put(changeLoginStateAction(true));
   } catch (error:any) {
     LocalStorage.removePermanentlyStoreData(USER_KEY);

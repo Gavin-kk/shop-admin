@@ -96,7 +96,7 @@ const GTable: FC = (): ReactElement => {
       title: '操作',
       render(rowData:IProduct): ReactElement {
         const viewProductDetails = () => {
-          history.push(`/admin/product/detail/${rowData.id}`);
+          history.push('/admin/product/detail', rowData.id);
         };
         const modifyTheProduct = () => {
           history.push('/admin/product/edit', rowData.id);

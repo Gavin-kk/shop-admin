@@ -42,9 +42,11 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
   useEffect(() => {
     if (userInfo && userInfo.role && userInfo.role.menu) {
       const { menu } = userInfo.role;
-      const a = menu.find((item) => item.indexOf(location.pathname) !== -1);
-      if (!a) {
-        // history.replace('/admin/home');
+      // console.log(menu);
+      const auth:string | undefined = menu.find((item) => item.indexOf(location.pathname) !== -1);
+
+      if (!auth) {
+        if (location.pathname === '/admin/home') return;
         history.goBack();
         message.error('权限不足');
       }

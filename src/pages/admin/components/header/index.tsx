@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { message, Popconfirm } from 'antd';
+import { Popconfirm } from 'antd';
 
 import LocalStorage from '@utils/local-storage-utils';
 import { USER_KEY } from '@src/common/constant/auth-constant';
@@ -26,13 +26,6 @@ const AdminHeader: FC = (): ReactElement => {
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
-
-  useEffect(() => {
-    if (history.location.pathname === '/admin/product/detail') {
-      history.replace('/admin/product');
-      message.error('非法访问');
-    }
-  }, [history]);
 
   // 退出登录
   const signOut = useCallback(() => {

@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/customize-cra": "^1.0.1",
+    "@types/echarts": "^4.9.7",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.5",
@@ -17,6 +18,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/react-router-redux": "^5.0.18",
     "@types/redux-thunk": "^2.1.0",
+    "@types/uuid": "^8.3.0",
     "antd": "^4.15.4",
     "axios": "^0.21.1",
     "babel-plugin-import": "^1.13.3",
@@ -25,6 +27,8 @@
     "craco-alias": "^3.0.0",
     "craco-antd": "^1.19.0",
     "dayjs": "^1.10.5",
+    "echarts": "^5.1.1",
+    "echarts-for-react": "^3.0.1",
     "immer": "^9.0.2",
     "less": "^4.1.1",
     "less-loader": "^8.1.1",
@@ -44,6 +48,7 @@
     "skycons": "^1.0.0",
     "styled-components": "^5.3.0",
     "typescript": "^4.1.2",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

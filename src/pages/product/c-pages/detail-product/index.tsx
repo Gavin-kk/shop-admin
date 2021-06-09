@@ -3,7 +3,7 @@ import React, {
   FC, memo, ReactElement, useEffect, useState, Fragment,
 } from 'react';
 import {
-  Card, Image, List, Spin, Tag,
+  Card, Image, List, message, Spin, Tag,
 } from 'antd';
 import Breadcrumbs from '@components/breadcrumbs';
 import { errorImg } from '@assets/img/img-error';
@@ -11,25 +11,27 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { IRootReducerStateType } from '@src/common/types/sotre-types/reducer.interface';
 import moment from 'moment';
 import { momentConfig } from '@src/config/moment-config';
+import { useHistory } from 'react-router-dom';
 import { ListWrapper } from './style';
 import { getGoodsDetailAction } from '../../store/action-creators';
 
 moment.locale('zh-cn', momentConfig);
 
-interface Params {
-  id: string
-}
-
-const DetailProduct: FC<RouteConfigComponentProps<Params>> = (props: RouteConfigComponentProps<Params>): ReactElement => {
+const DetailProduct: FC<RouteConfigComponentProps> = (props: RouteConfigComponentProps): ReactElement => {
   const { detail } = useSelector((state: IRootReducerStateType) => ({
     detail: state.product.detail,
   }), shallowEqual);
   const [whetherToLoad, setWhetherToLoad] = useState<boolean>(true);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
-    const { id } = props.match.params;
-    dispatch(getGoodsDetailAction(parseInt(id, 10)));
+    const id:number | undefined = props.location.state as number;
+    if (!id) {
+      history.replace('/admin/product');
+      message.error('非法访问');
+    }
+    dispatch(getGoodsDetailAction(id));
   }, []);
 
   useEffect(() => {

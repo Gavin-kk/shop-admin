@@ -68,12 +68,14 @@ const GModal: FC<IProps> = ({
     if (method === Method.ADD) {
       //  在这里执行发送网络请求
       dispatch(addUserAction(values));
+      // 关闭弹框
+      changeIsModalVisible(false);
     } else {
     //   发送更新请求
       values.id = userInfo?.userInfo.id;
       //   userInfo.userInfo.id
-      dispatch(updateUserInfoAction(values));
       changeIsModalVisible(false);
+      dispatch(updateUserInfoAction(values));
     }
   };
 
@@ -138,13 +140,6 @@ const GModal: FC<IProps> = ({
         >
           <Input />
         </Form.Item>
-        {/* <Form.Item */}
-        {/*  label="角色名称" */}
-        {/*  name="role_id" */}
-        {/*  rules={[{ required: false, message: 'Please input your username!' }]} */}
-        {/* > */}
-        {/*  <Input placeholder="这个先放一放" /> */}
-        {/* </Form.Item> */}
       </Form>
     </Modal>
   );

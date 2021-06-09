@@ -16,6 +16,7 @@ const AddProduct = lazy(() => import('@pages/product/c-pages/add-product'));
 const HomeProduct = lazy(() => import('@pages/product/c-pages/home-product'));
 const EditProduct = lazy(() => import('@pages/product/c-pages/edit-product'));
 const DetailProduct = lazy(() => import('@pages/product/c-pages/detail-product'));
+const Order = lazy(() => import('@pages/order'));
 
 const routers:RouteConfig[] = [
   {
@@ -86,10 +87,14 @@ const routers:RouteConfig[] = [
             component: EditProduct,
           },
           {
-            path: '/admin/product/detail/:id',
+            path: '/admin/product/detail/',
             component: DetailProduct,
           },
         ],
+      },
+      {
+        path: '/admin/order',
+        component: Order,
       },
     ],
   },

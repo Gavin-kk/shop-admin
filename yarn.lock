@@ -1857,6 +1857,13 @@
     "@types/webpack-bundle-analyzer" "*"
     "@types/workbox-webpack-plugin" "*"
 
+"@types/echarts@^4.9.7":
+  version "4.9.7"
+  resolved "https://registry.nlark.com/@types/echarts/download/@types/echarts-4.9.7.tgz?cache=0&sync_timestamp=1621241051537&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fecharts%2Fdownload%2F%40types%2Fecharts-4.9.7.tgz#4437fb503111f5b1ed7961e7b95c7ed09a4844a3"
+  integrity sha1-RDf7UDER9bHteWHnuVx+0JpIRKM=
+  dependencies:
+    "@types/zrender" "*"
+
 "@types/eslint-scope@^3.7.0":
   version "3.7.0"
   resolved "https://registry.npm.taobao.org/@types/eslint-scope/download/@types/eslint-scope-3.7.0.tgz#4792816e31119ebd506902a482caec4951fabd86"
@@ -2112,6 +2119,11 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/uuid@^8.3.0":
+  version "8.3.0"
+  resolved "https://registry.nlark.com/@types/uuid/download/@types/uuid-8.3.0.tgz#215c231dff736d5ba92410e6d602050cce7e273f"
+  integrity sha1-IVwjHf9zbVupJBDm1gIFDM5+Jz8=
+
 "@types/webpack-bundle-analyzer@*":
   version "4.4.0"
   resolved "https://registry.npm.taobao.org/@types/webpack-bundle-analyzer/download/@types/webpack-bundle-analyzer-4.4.0.tgz?cache=0&sync_timestamp=1618302884943&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack-bundle-analyzer%2Fdownload%2F%40types%2Fwebpack-bundle-analyzer-4.4.0.tgz#cd7cc5c24e17044023bc6d26dd060287fcf370f4"
@@ -2158,6 +2170,11 @@
   integrity sha1-NPf+yLOJ1/PB/QgCaldj4HLTxtw=
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/zrender@*":
+  version "4.0.0"
+  resolved "https://registry.nlark.com/@types/zrender/download/@types/zrender-4.0.0.tgz?cache=0&sync_timestamp=1621243943496&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fzrender%2Fdownload%2F%40types%2Fzrender-4.0.0.tgz#a6806f12ec4eccaaebd9b0d816f049aca6188fbd"
+  integrity sha1-poBvEuxOzKrr2bDYFvBJrKYYj70=
 
 "@typescript-eslint/eslint-plugin@^4.22.1", "@typescript-eslint/eslint-plugin@^4.5.0":
   version "4.22.1"
@@ -4870,6 +4887,22 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
+echarts-for-react@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npm.taobao.org/echarts-for-react/download/echarts-for-react-3.0.1.tgz?cache=0&sync_timestamp=1614303539797&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fecharts-for-react%2Fdownload%2Fecharts-for-react-3.0.1.tgz#cf9de60e468b342c244314be2325e00d765a5137"
+  integrity sha1-z53mDkaLNCwkQxS+IyXgDXZaUTc=
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    size-sensor "^1.0.1"
+
+echarts@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.nlark.com/echarts/download/echarts-5.1.1.tgz?cache=0&sync_timestamp=1619495905737&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fecharts%2Fdownload%2Fecharts-5.1.1.tgz#b186f162f017c555cfd67b12ede6762bdc3ddfda"
+  integrity sha1-sYbxYvAXxVXP1nsS7eZ2K9w939o=
+  dependencies:
+    tslib "2.0.3"
+    zrender "5.1.0"
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.nlark.com/ee-first/download/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -5539,7 +5572,7 @@ extsprintf@^1.2.0:
   resolved "https://registry.nlark.com/extsprintf/download/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fast-deep-equal@^3.1.1:
+fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.nlark.com/fast-deep-equal/download/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha1-On1WtVnWy8PrUSMlJE5hmmXGxSU=
@@ -11232,6 +11265,11 @@ sisteransi@^1.0.5:
   resolved "https://registry.npm.taobao.org/sisteransi/download/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha1-E01oEpd1ZDfMBcoBNw06elcQde0=
 
+size-sensor@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/size-sensor/download/size-sensor-1.0.1.tgz#f84e46206d3e259faff1d548e4b3beca93219dbb"
+  integrity sha1-+E5GIG0+JZ+v8dVI5LO+ypMhnbs=
+
 skycons@^1.0.0:
   version "1.0.0"
   resolved "https://registry.nlark.com/skycons/download/skycons-1.0.0.tgz#afb160c5901470aae84676fbc38bbd7dd5b69d8f"
@@ -12045,6 +12083,11 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
+tslib@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.0.3.tgz?cache=0&sync_timestamp=1617647281845&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
+  integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
+
 tslib@^1.10.0, tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.nlark.com/tslib/download/tslib-1.14.1.tgz?cache=0&sync_timestamp=1618847132149&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftslib%2Fdownload%2Ftslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
@@ -12386,6 +12429,11 @@ uuid@^3.3.2, uuid@^3.4.0:
 uuid@^8.3.0:
   version "8.3.2"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.3.2.tgz?cache=0&sync_timestamp=1607460209394&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha1-gNW1ztJxu5r2xEXyGhoExgbO++I=
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.nlark.com/uuid/download/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha1-gNW1ztJxu5r2xEXyGhoExgbO++I=
 
 v8-compile-cache@^2.0.3:
@@ -13039,3 +13087,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npm.taobao.org/yocto-queue/download/yocto-queue-0.1.0.tgz?cache=0&sync_timestamp=1606290212047&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyocto-queue%2Fdownload%2Fyocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha1-ApTrPe4FAo0x7hpfosVWpqrxChs=
+
+zrender@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.nlark.com/zrender/download/zrender-5.1.0.tgz#b6a84c3aa7ccc6642ee0519901ca4c0835c4d85e"
+  integrity sha1-tqhMOqfMxmQu4FGZAcpMCDXE2F4=
+  dependencies:
+    tslib "2.0.3"

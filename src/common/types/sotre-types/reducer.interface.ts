@@ -9,6 +9,7 @@ import {
 // import { RouterState } from 'react-router-redux';
 import { IGetUserInfoResponse, IUserList } from '@src/pages/user/typing';
 import { IRoleList } from '@src/pages/role/typing';
+import { IOrderTable } from '@src/pages/order/typing';
 import { IActionType } from './action-type';
 
 // 登录页面的 reducer 数据的状态
@@ -50,6 +51,11 @@ export interface IRole {
     info:IRoleList | null
 }
 
+// 订单管理reducer数据
+export interface IOrder{
+    orderList:IOrderTable[]
+}
+
 export interface IRootReducerStateType {
     auth: ILoginState
     weather:IDefaultData
@@ -57,6 +63,7 @@ export interface IRootReducerStateType {
     product:IProductState
     user:IUser
     role:IRole
+    order:IOrder
 }
 
 export type ReducerType = Reducer<CombinedState<{auth: ILoginState, weather: IDefaultData, classify: ICategoryState, product: IProductState, user: {}}>, IActionType>

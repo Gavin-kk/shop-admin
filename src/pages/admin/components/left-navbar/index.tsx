@@ -18,18 +18,9 @@ const LeftNavbar: FC = (): ReactElement => {
   }), shallowEqual);
   const history = useHistory<History>();
 
-  // const processingMenu = (menuList: MenuType[]) => menuList.map((item) => {
-  //   if (item.children && item.title !== '商品管理') {
-  //     return (
-  //       <SubMenu key={item.title} icon={item.icon} title={item.title}>
-  //         {/* 如果存在 children 那么就重新调用一下处理menu 把children传入 */}
-  //         { processingMenu(item.children)}
-  //       </SubMenu>
-  //     );
-  //   }
   const processingMenu = (menuList: MenuType[]) => menuList.map((item) => {
     const auth = userInfo!.role.menu.find((itemx) => itemx === item.key);
-    if (auth) { // 鉴定权限
+    if (auth || item.title === '首页') { // 鉴定权限
       if (item.children && item.title !== '商品管理') {
         return (
           <SubMenu key={item.title} icon={item.icon} title={item.title}>
@@ -46,6 +37,15 @@ const LeftNavbar: FC = (): ReactElement => {
         </Menu.Item>
       );
     }
+    // if (item.routerPath === '/admin/home') {
+    //   return (
+    //     <Menu.Item key="/admin/home" icon={<HomeOutlined />}>
+    //       <NavLink to="/admin/home">
+    //         首页
+    //       </NavLink>
+    //     </Menu.Item>
+    //   );
+    // }
     return null;
   });
 

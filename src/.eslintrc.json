@@ -1,0 +1,83 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "react/prop-types": [
+      0
+    ],
+    "react/destructuring-assignment": [
+      0,
+      "always"
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "no-use-before-define": "off",
+    "import/no-unresolved": 0,
+    "import/extensions": 0,
+    "import/prefer-default-export": 0,
+    "no-shadow": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "linebreak-style": 0,
+    "max-len": 0,
+    "@typescript-eslint/no-var-requires": 1,
+    "no-param-reassign": 0,
+    "class-methods-use-this": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/jsx-props-no-spreading": 0,
+    "camelcase": 0,
+    "react/no-this-in-sfc": 0,
+    "padded-blocks": 1,
+    "no-trailing-spaces": 1,
+    "no-multiple-empty-lines": 1,
+    "semi": 1,
+    "react/jsx-indent": 1,
+    "indent": 1,
+    "space-before-blocks": 1,
+    "keyword-spacing": 1,
+    "no-prototype-builtins": 0,
+    "react/jsx-closing-tag-location": 0,
+    "react/jsx-indent-props": 1,
+    "jsx-quotes": 1,
+    "react/jsx-tag-spacing": 1,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "no-empty": 0
+  }
+}

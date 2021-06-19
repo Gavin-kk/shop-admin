@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactElement, memo, useEffect, Suspense,
+  FC, ReactElement, memo, useEffect, Suspense, useMemo,
 } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Layout, message } from 'antd';
@@ -42,7 +42,6 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
   useEffect(() => {
     if (userInfo && userInfo.role && userInfo.role.menu) {
       const { menu } = userInfo.role;
-      // console.log(menu);
       const auth:string | undefined = menu.find((item) => item.indexOf(location.pathname) !== -1);
 
       if (!auth) {
@@ -55,26 +54,29 @@ const Admin: FC<PageProps> = (props:PageProps): ReactElement => {
 
   const childRouters:RouteConfig[] | undefined = props.route?.routes;
 
+  const LayoutRender = useMemo(() => (
+    <Layout>
+      <Sider className="layout">
+        <LeftNavbar />
+      </Sider>
+      <Layout>
+        <Header style={{ height: 100 }} className="head-parent">
+          <AdminHeader />
+        </Header>
+        <Content className="content">
+          <Suspense fallback={<Loading />}>
+            {renderRoutes(childRouters)}
+          </Suspense>
+        </Content>
+        <Footer>
+          <AdminFooter />
+        </Footer>
+      </Layout>
+    </Layout>
+  ), []);
   return (
     <AdminWrapper>
-      <Layout>
-        <Sider className="layout">
-          <LeftNavbar />
-        </Sider>
-        <Layout>
-          <Header style={{ height: 100 }} className="head-parent">
-            <AdminHeader />
-          </Header>
-          <Content className="content">
-            <Suspense fallback={<Loading />}>
-              {renderRoutes(childRouters)}
-            </Suspense>
-          </Content>
-          <Footer>
-            <AdminFooter />
-          </Footer>
-        </Layout>
-      </Layout>
+      {LayoutRender}
     </AdminWrapper>
   );
 };
